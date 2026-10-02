@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cyber Security Courseware · Michal Kleinboim</title>
+<meta name="description" content="Case study: Cyber Security Courseware, an interactive, story-driven compliance course built in Articulate Storyline.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --bg:#0d0f14; --bg-2:#11141b; --surface:rgba(255,255,255,.035); --surface-2:rgba(255,255,255,.06);
+  --border:rgba(255,255,255,.09); --border-2:rgba(255,255,255,.16);
+  --text:#eef0f5; --muted:#a6adbd; --dim:#7f8798;
+  --o:#ff991a; --r:#ec1c08; --m:#e0307a;
+  --grad:linear-gradient(100deg,#ff991a 0%,#f5531a 50%,#ec1c08 100%);
+  --grad-wide:linear-gradient(100deg,#ff991a 0%,#f0401a 55%,#e0307a 100%);
+  --grad-text:linear-gradient(100deg,#ffb04a 0%,#ff6a3d 55%,#ff5c96 100%);
+  --radius:20px; --radius-sm:12px;
+  --head:"Space Grotesk",system-ui,sans-serif; --body:"Inter",system-ui,sans-serif;
+  --max:1200px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.6 var(--body);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:var(--head);line-height:1.1;margin:0;letter-spacing:-.02em}
+p{margin:0}
+:focus-visible{outline:2px solid #ffb04a;outline-offset:3px;border-radius:8px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:12px;top:-60px;z-index:100;background:#fff;color:#000;padding:10px 14px;border-radius:8px;font-weight:600}
+.skip:focus{top:12px}
+.grad-text{background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 22px;border-radius:999px;font:600 15px/1 var(--body);text-decoration:none;border:1px solid transparent;cursor:pointer;transition:transform .2s ease,box-shadow .25s ease,background .25s ease,border-color .25s ease;white-space:nowrap}
+.btn svg{width:18px;height:18px;flex:none}
+.btn-grad{background:var(--grad);color:#14080a;box-shadow:0 8px 28px -10px rgba(236,60,20,.7)}
+.btn-grad:hover{transform:translateY(-2px);box-shadow:0 14px 36px -10px rgba(236,60,20,.85)}
+.btn-ghost{background:var(--surface-2);border-color:var(--border-2);color:var(--text)}
+.btn-ghost:hover{border-color:rgba(255,153,26,.6);transform:translateY(-2px)}
+.btn-link{color:var(--text);padding:0 6px;min-height:46px;display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-weight:500}
+.btn-link span{border-bottom:1px solid rgba(255,153,26,.6);padding-bottom:2px}
+.btn-link:hover span{border-color:#ffb04a}
+
+/* Header */
+.top{position:sticky;top:0;z-index:50;background:rgba(13,15,20,.72);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);border-bottom:1px solid var(--border)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.mk{display:inline-flex;align-items:center;gap:10px;text-decoration:none;min-height:44px}
+.mk b{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--grad);color:#14080a;font:700 17px/1 var(--head);letter-spacing:-.04em;transform:rotate(-4deg)}
+.mk span{font:600 15px/1.1 var(--head);letter-spacing:-.01em}
+.mk small{display:block;font:400 12px/1.2 var(--body);color:var(--muted);letter-spacing:0}
+.nav{display:flex;align-items:center;gap:6px}
+.nav a.l{color:var(--muted);text-decoration:none;font-weight:500;font-size:15px;padding:0 12px;min-height:44px;display:inline-flex;align-items:center;border-radius:999px;transition:color .2s,background .2s}
+.nav a.l:hover{color:var(--text);background:var(--surface-2)}
+.nav .btn{margin-left:8px;min-height:42px;padding:0 18px;font-size:14px}
+.burger{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--border-2);background:var(--surface-2);color:var(--text);cursor:pointer;align-items:center;justify-content:center}
+.burger svg{width:22px;height:22px}
+@media (max-width:900px){
+  .burger{display:inline-flex}
+  .nav{position:absolute;left:0;right:0;top:68px;flex-direction:column;align-items:stretch;gap:4px;padding:12px 16px 20px;background:rgba(13,15,20,.97);border-bottom:1px solid var(--border);display:none}
+  .nav.open{display:flex}
+  .nav a.l{min-height:48px;font-size:16px;padding:0 14px}
+  .nav .btn{margin:8px 0 0}
+}
+
+footer{padding:40px 0 60px;color:var(--dim);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid var(--border);padding-top:28px}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover{color:var(--text)}
+
+.dir-badge{position:fixed;left:14px;bottom:14px;z-index:60;padding:8px 13px;border-radius:999px;background:rgba(13,15,20,.9);border:1px solid rgba(255,153,26,.45);color:#ffd2a6;font:600 12px/1 var(--body);letter-spacing:.02em;backdrop-filter:blur(8px);box-shadow:0 6px 20px rgba(0,0,0,.4)}
+
+
+/* Case hero */
+.c-hero{position:relative;overflow:hidden;isolation:isolate;padding:44px 0 64px}
+.blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.45;z-index:-1;pointer-events:none}
+.b1{width:560px;height:560px;background:radial-gradient(circle,#ff8a1a 0%,transparent 65%);top:-200px;right:-140px}
+.b3{width:520px;height:520px;background:radial-gradient(circle,#c4206a 0%,transparent 65%);top:80px;left:-220px;opacity:.3}
+.grid-bg{position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse at 60% 30%,#000 0%,transparent 70%);mask-image:radial-gradient(ellipse at 60% 30%,#000 0%,transparent 70%)}
+.crumbs{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:14px;color:var(--dim);margin-bottom:28px}
+.crumbs a{color:var(--muted);text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
+.crumbs a:hover{color:var(--text)}
+.c-hero .kicker{display:inline-flex;align-items:center;gap:10px;font:500 13px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#ffab5e;margin-bottom:18px}
+.kicker::before{content:"";width:28px;height:2px;border-radius:2px;background:var(--grad)}
+.c-hero h1{font-size:clamp(38px,6vw,72px);font-weight:600;letter-spacing:-.035em;line-height:1.02;max-width:900px}
+.c-hero .sub{margin-top:20px;font-size:clamp(16px,1.6vw,19px);color:var(--muted);max-width:680px}
+.banner{margin-top:44px;position:relative;border-radius:24px;overflow:hidden;aspect-ratio:21/8;display:grid;place-items:center;border:1px solid var(--border);
+  background:radial-gradient(80% 120% at 0% 0%,#3a2a6e 0%,transparent 60%),radial-gradient(80% 120% at 100% 100%,#a11d4a 0%,transparent 60%),radial-gradient(60% 80% at 80% 10%,rgba(255,140,30,.35),transparent 60%),#16142a}
+.banner::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.12) 1px,transparent 1.2px);background-size:18px 18px;opacity:.5}
+.banner svg.main{width:110px;height:110px;color:#fff;position:relative;z-index:1;filter:drop-shadow(0 10px 30px rgba(0,0,0,.4))}
+.banner .lbl{position:absolute;left:16px;bottom:16px;z-index:1;font-size:12px;padding:5px 11px;border-radius:999px;background:rgba(0,0,0,.5);color:#eee;display:inline-flex;gap:6px;align-items:center}
+.banner .lbl svg{width:13px;height:13px}
+.metas{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:12px;margin-top:22px}
+.meta{padding:14px 18px;border-radius:16px;background:var(--surface-2);border:1px solid var(--border);min-width:0}
+.meta small{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:5px}
+.meta span{font-weight:500;font-size:15px}
+.meta.tbc span{color:#ffcf9a}
+
+/* Body */
+.c-body{display:grid;grid-template-columns:220px minmax(0,1fr);gap:64px;padding-top:40px;padding-bottom:80px}
+.toc{position:sticky;top:96px;align-self:start;display:grid;gap:4px}
+.toc a{display:flex;gap:10px;align-items:center;min-height:44px;padding:0 12px;border-radius:10px;color:var(--muted);text-decoration:none;font-size:14.5px;border-left:2px solid var(--border)}
+.toc a:hover{color:var(--text);border-left-color:#ff8a3d;background:var(--surface)}
+.toc a b{font:600 12px var(--head);color:#ffab5e}
+.toc .btn{margin-top:18px}
+.blk{padding:0 0 56px;scroll-margin-top:90px}
+.blk-h{display:flex;align-items:baseline;gap:16px;margin-bottom:18px}
+.num{font:600 15px/1 var(--head);padding:8px 11px;border-radius:10px;border:1px solid transparent;background-image:linear-gradient(var(--bg),var(--bg)),var(--grad-wide);background-origin:border-box;background-clip:padding-box,border-box;color:#ffb877;flex:none;transform:translateY(-4px)}
+.blk h2{font-size:clamp(26px,3.2vw,36px);font-weight:600}
+.blk p{color:#c9cdd8;font-size:17.5px;line-height:1.75;max-width:720px}
+.blk p + p{margin-top:14px}
+.pull{margin-top:26px;padding:22px 24px;border-radius:18px;background:linear-gradient(110deg,rgba(255,153,26,.1),rgba(224,48,122,.08));border:1px solid rgba(255,140,40,.22);font:500 19px/1.5 var(--head);color:var(--text);max-width:720px}
+.aud{display:flex;gap:18px;align-items:flex-start;padding:22px 24px;border-radius:18px;background:var(--surface);border:1px solid var(--border);max-width:720px}
+.aud i{width:44px;height:44px;flex:none;border-radius:12px;display:grid;place-items:center;background:rgba(255,140,40,.1);border:1px solid rgba(255,140,40,.25);color:#ffa25a}
+.aud i svg{width:22px;height:22px}
+.aud p{margin:0}
+.roles{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.roles span{padding:8px 14px;border-radius:999px;font-size:14px;background:var(--surface-2);border:1px solid var(--border-2);color:#dfe2ea}
+
+.video-wrap{position:relative;margin-top:8px;padding:10px;border-radius:24px;border:1px solid rgba(255,140,40,.45);background:linear-gradient(135deg,rgba(255,153,26,.22),rgba(236,28,8,.16),rgba(224,48,122,.2)),#120f14;box-shadow:0 30px 80px -30px rgba(236,60,20,.6),0 0 60px -20px rgba(224,48,122,.4)}
+.video{position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:radial-gradient(70% 90% at 50% 40%,#1d1f2a 0%,#08090c 80%);display:grid;place-items:center}
+.video .t{position:absolute;top:16px;left:0;right:0;text-align:center;font-size:13px;color:#b9bdc9}
+.play{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;background:var(--grad);color:#14080a;border:0;cursor:pointer;box-shadow:0 0 0 10px rgba(255,140,40,.14),0 0 50px rgba(255,100,40,.6);transition:transform .25s}
+.play:hover{transform:scale(1.06)}
+.play svg{width:32px;height:32px;margin-left:4px}
+.video .soon{position:absolute;bottom:16px;left:16px;font-size:13px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--border-2);color:#d6d9e2}
+.vbar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 6px 4px;flex-wrap:wrap}
+.vbar p{font-size:14px;color:#f6e6dd;font-weight:500;margin:0;padding-left:4px}
+.fs{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;background:rgba(13,15,20,.85);color:var(--text);border:1px solid rgba(255,255,255,.18);font:500 14px var(--body);cursor:pointer}
+.fs svg{width:16px;height:16px}
+.fs:hover{background:#0d0f14}
+
+.outcome{position:relative;padding:28px;border-radius:18px;border:2px dashed rgba(255,170,90,.55);background:repeating-linear-gradient(135deg,rgba(255,153,26,.05) 0 12px,transparent 12px 24px);max-width:720px}
+.outcome .flag{display:inline-flex;align-items:center;gap:8px;font:600 12px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;color:#14080a;background:#ffb04a;padding:7px 11px;border-radius:999px;margin-bottom:14px}
+.outcome h3{font-size:22px;margin-bottom:8px}
+.outcome p{font-size:16px;color:var(--muted)}
+.ph-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.ph-grid div{padding:16px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.02)}
+.ph-grid b{display:block;font:600 26px/1 var(--head);color:#5f6676}
+.ph-grid small{color:var(--dim);font-size:13px}
+
+.pn{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+.pn a{display:flex;flex-direction:column;gap:6px;padding:24px;text-decoration:none;border-radius:20px;border:1px solid var(--border);background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));transition:transform .3s,box-shadow .3s,border-color .3s}
+.pn a:hover{transform:translateY(-3px);border-color:rgba(255,140,40,.45);box-shadow:0 20px 50px -20px rgba(236,60,20,.55)}
+.pn small{color:#ffab5e;font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:500}
+.pn span{font:600 20px/1.25 var(--head)}
+.pn a.next{text-align:right;align-items:flex-end}
+
+.sticky-cta{display:none}
+.js .rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.js .rv.in{opacity:1;transform:none}
+
+@media (max-width:900px){
+  .c-body{grid-template-columns:1fr;gap:0}
+  .toc{display:none}
+  .metas{grid-template-columns:repeat(2,1fr)}
+  .banner{aspect-ratio:16/8}
+}
+@media (max-width:620px){
+  .wrap{padding:0 16px}
+  .c-hero{padding:28px 0 40px}
+  .crumbs{margin-bottom:12px}
+  .banner{aspect-ratio:4/3;border-radius:18px;margin-top:32px}
+  .banner svg.main{width:80px;height:80px}
+  .metas{grid-template-columns:1fr 1fr;gap:10px}
+  .meta{padding:12px 14px}
+  .meta:nth-child(2){grid-column:span 2;order:3}
+  .meta:nth-child(3){order:4}.meta:nth-child(4){order:2}
+  .meta:nth-child(3){grid-column:span 2}
+  .blk{padding-bottom:44px}
+  .blk p{font-size:16.5px}
+  .ph-grid{grid-template-columns:repeat(3,1fr);gap:8px}
+  .ph-grid div{padding:12px 10px}
+  .ph-grid small{font-size:12px}
+  .pn{grid-template-columns:1fr}
+  .play{width:64px;height:64px}.play svg{width:24px;height:24px}
+  .video-wrap{padding:7px;border-radius:18px}
+  .video{border-radius:12px}
+  .outcome{padding:22px}
+  .sticky-cta{display:flex;position:fixed;right:12px;bottom:12px;z-index:55;gap:8px}
+  .sticky-cta .btn{min-height:46px;padding:0 16px;font-size:14px}
+  footer{padding-bottom:90px}
+  .dir-badge{font-size:11px;padding:7px 11px;left:10px;bottom:66px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mk" href="index.html" aria-label="Michal Kleinboim, home">
+      <b aria-hidden="true">MK</b>
+      <span>Michal Kleinboim<small>L&amp;D · Instructional Design</small></span>
+    </a>
+    <button class="burger" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a class="l" href="index.html#work" aria-current="page">Work</a>
+      <a class="l" href="index.html#process">How I work</a>
+      <a class="l" href="index.html#experience">Experience</a>
+      <a class="l" href="index.html#contact">Contact</a>
+      <a class="btn btn-grad" href="#" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg>
+        Download CV
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="c-hero" aria-labelledby="case-h">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="blob b1" aria-hidden="true"></div>
+    <div class="blob b3" aria-hidden="true"></div>
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="index.html#work">Work</a><span aria-hidden="true">/</span><span aria-current="page" style="color:var(--text)">Cyber Security</span></nav>
+      <div class="kicker">Case study · E-learning</div>
+      <h1 id="case-h">Cyber Security <span class="grad-text">Courseware</span></h1>
+      <p class="sub">Turned mandatory security training into an engaging, story-driven course with point-of-view videos starring real employees.</p>
+      <div class="banner" role="img" aria-label="Placeholder banner image for the Cyber Security Courseware project">
+        <svg class="main" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><rect x="9" y="10.5" width="6" height="5" rx="1"/><path d="M10 10.5V9a2 2 0 0 1 4 0v1.5"/></svg>
+        <span class="lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/></svg>image</span>
+      </div>
+      <dl class="metas" style="margin-bottom:0">
+        <div class="meta"><dt><small>Category</small></dt><dd style="margin:0"><span>E-learning</span></dd></div>
+        <div class="meta"><dt><small>Role</small></dt><dd style="margin:0"><span>Instructional Designer, Scriptwriter &amp; Producer</span></dd></div>
+        <div class="meta"><dt><small>Tools</small></dt><dd style="margin:0"><span>Articulate Storyline</span></dd></div>
+        <div class="meta tbc"><dt><small>Client</small></dt><dd style="margin:0"><span>[to confirm]</span></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="wrap c-body">
+    <aside class="toc" aria-label="On this page">
+      <a href="#challenge"><b>01</b>The challenge</a>
+      <a href="#audience"><b>02</b>Audience</a>
+      <a href="#approach"><b>03</b>My approach</a>
+      <a href="#product"><b>04</b>The product</a>
+      <a href="#outcome"><b>05</b>Outcome</a>
+      <a class="btn btn-ghost" href="index.html#contact">Get in touch</a>
+    </aside>
+    <article>
+      <section class="blk rv" id="challenge" aria-labelledby="h1x">
+        <div class="blk-h"><span class="num" aria-hidden="true">01</span><h2 id="h1x">The challenge</h2></div>
+        <p>Mandatory cyber-security training is notoriously dry, and employees tune out. The goal was to turn a monotonous compliance topic into a learning experience people would actually engage with.</p>
+      </section>
+      <section class="blk rv" id="audience" aria-labelledby="h2x">
+        <div class="blk-h"><span class="num" aria-hidden="true">02</span><h2 id="h2x">Audience</h2></div>
+        <div class="aud"><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c1-3.5 3.5-5 6.5-5s5.5 1.5 6.5 5"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.3 0 4 1.2 4.6 4"/></svg></i><p>All employees required to complete annual security training.</p></div>
+      </section>
+      <section class="blk rv" id="approach" aria-labelledby="h3x">
+        <div class="blk-h"><span class="num" aria-hidden="true">03</span><h2 id="h3x">My approach</h2></div>
+        <p>I built interactive courseware around point-of-view videos featuring real employees. I wrote the scripts, managed the director, actors and production schedule, and even acted in a scene myself, so the scenarios felt relatable and authentic.</p>
+        <div class="roles" aria-label="What I did"><span>Scriptwriting</span><span>Production management</span><span>On-screen acting</span><span>Storyline development</span></div>
+      </section>
+      <section class="blk rv" id="product" aria-labelledby="h4x">
+        <div class="blk-h"><span class="num" aria-hidden="true">04</span><h2 id="h4x">The product</h2></div>
+        <figure style="margin:0">
+          <div class="video-wrap">
+            <div class="video">
+              <span class="t" lang="he" dir="rtl">לומדת אבטחת מידע</span>
+              <button class="play" aria-label="Play video (coming soon)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg></button>
+              <span class="soon">Video coming soon</span>
+            </div>
+            <div class="vbar">
+              <p>Excerpt from the courseware (3× speed)</p>
+              <button class="fs" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>Full screen</button>
+            </div>
+          </div>
+          <figcaption class="sr-only">Excerpt from the courseware (3× speed). Video coming soon.</figcaption>
+        </figure>
+      </section>
+      <section class="blk rv" id="outcome" aria-labelledby="h5x">
+        <div class="blk-h"><span class="num" aria-hidden="true">05</span><h2 id="h5x">Outcome</h2></div>
+        <div class="outcome">
+          <span class="flag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 8v5M12 16.5v.5"/><circle cx="12" cy="12" r="9"/></svg>Placeholder</span>
+          <h3>Outcome / impact: to confirm with Michal</h3>
+          <p>e.g. completion rate, feedback. No numbers are shown until they are confirmed.</p>
+          <div class="ph-grid" aria-hidden="true">
+            <div><b>—</b><small>Completion rate</small></div>
+            <div><b>—</b><small>Learner feedback</small></div>
+            <div><b>—</b><small>Other impact</small></div>
+          </div>
+        </div>
+      </section>
+      <nav class="pn rv" aria-label="Project navigation">
+        <a href="index.html#work"><small>← Back to work</small><span>All projects</span></a>
+        <a class="next" href="case.html"><small>Next project →</small><span>AI for Teachers: Microsoft Education IL</span></a>
+      </nav>
+    </article>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Michal Kleinboim</span>
+    <span><a href="mailto:Michal.kleinboim@gmail.com">Email</a> · <a href="#">LinkedIn</a> · <a href="index.html">Home</a></span>
+  </div>
+</footer>
+
+<div class="sticky-cta"><a class="btn btn-ghost" href="index.html#contact" style="background:rgba(13,15,20,.9)">Contact</a><a class="btn btn-grad" href="#" download>Download CV</a></div>
+<div class="dir-badge" aria-hidden="true">Direction C: AI-forward / bold</div>
+
+<script>
+document.documentElement.classList.add('js');
+const burger=document.querySelector('.burger'),nav=document.getElementById('nav');
+burger.addEventListener('click',()=>{const o=nav.classList.toggle('open');burger.setAttribute('aria-expanded',o);burger.setAttribute('aria-label',o?'Close menu':'Open menu')});
+const rv=document.querySelectorAll('.rv');
+if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
+  rv.forEach(el=>io.observe(el));
+}else rv.forEach(el=>el.classList.add('in'));
+</script>
+</body>
+</html>

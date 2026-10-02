@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio Directions</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#f2f5f9; --card:#fff; --ink:#15171a; --muted:#5b6370; --grad:linear-gradient(90deg,#ff991a,#ec1c08); }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:Poppins,system-ui,sans-serif; background:var(--bg); color:var(--ink); padding:48px 16px; }
+  main { max-width:1000px; margin:0 auto; }
+  h1 { font-size:clamp(1.6rem,4vw,2.4rem); margin:0 0 8px; }
+  p.lead { color:var(--muted); margin:0 0 32px; }
+  .grid { display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
+  .card { background:var(--card); border-radius:18px; padding:24px; box-shadow:0 6px 24px rgba(20,30,50,.06); }
+  .tag { display:inline-block; font-size:.75rem; font-weight:600; color:#fff; background:var(--grad); padding:4px 10px; border-radius:99px; }
+  h2 { margin:12px 0 6px; font-size:1.25rem; }
+  .card p { color:var(--muted); font-size:.95rem; line-height:1.55; margin:0 0 18px; }
+  .links { display:flex; gap:10px; flex-wrap:wrap; }
+  a.btn { text-decoration:none; font-weight:600; font-size:.9rem; padding:10px 16px; border-radius:99px; border:1.5px solid #e2e7ee; color:var(--ink); }
+  a.btn.primary { background:var(--grad); color:#fff; border-color:transparent; }
+  a.btn:focus-visible { outline:3px solid #ff991a; outline-offset:2px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Pick a direction</h1>
+  <p class="lead">Three design directions for Michal's portfolio. They all use the same content, so compare look and feel only. Try each one on your phone too.</p>
+  <div class="grid">
+    <section class="card"><span class="tag">A</span><h2>Polished original</h2><p>Her current Figma identity (sidebar profile card, orange gradient, peach cards), rebuilt at a professional level.</p><div class="links"><a class="btn primary" href="a/index.html">Home</a><a class="btn" href="a/case.html">Case study</a></div></section>
+    <section class="card"><span class="tag">B</span><h2>Modern editorial</h2><p>Airy, serif headlines, cream background, big case-study cards. Orange used sparingly as an accent.</p><div class="links"><a class="btn primary" href="b/index.html">Home</a><a class="btn" href="b/case.html">Case study</a></div></section>
+    <section class="card"><span class="tag">C</span><h2>AI-forward / bold</h2><p>Dark, glowing gradients, bento grids. Leans into the "AI in learning" story for tech employers.</p><div class="links"><a class="btn primary" href="c/index.html">Home</a><a class="btn" href="c/case.html">Case study</a></div></section>
+  </div>
+</main>
+</body>
+</html>

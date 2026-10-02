@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Michal Kleinboim · Learning & Development</title>
+<meta name="description" content="Michal Kleinboim, Learning & Development and Instructional Design Specialist. Portfolio, experience and contact.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f3ec; --bg-2:#efe8dc; --paper:#fffdf9; --ink:#16130f; --ink-2:#3d3832; --muted:#655e55;
+  --line:#ded5c7; --accent:#c4300d; --g1:#ff991a; --g2:#ec1c08;
+  --grad:linear-gradient(90deg,var(--g1),var(--g2));
+  --gradt:linear-gradient(90deg,#e0620c,#c4180a);
+  --gradb:linear-gradient(90deg,#d1470c,#b3160a);
+  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --wrap:1240px; --gut:clamp(20px,4vw,56px);
+  --r:22px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.65 var(--sans);overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gut)}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:#fff;padding:10px 16px;border-radius:999px;z-index:100}
+.skip:focus{left:12px}
+.eyebrow{font:500 12px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:12px;margin:0 0 22px}
+.eyebrow::before{content:"";width:28px;height:2px;background:var(--grad);border-radius:2px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.01em;margin:0}
+h2{font-size:clamp(40px,5.6vw,76px);line-height:1}
+h2 em,h1 em{font-style:italic}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 24px;border-radius:999px;font:500 15px/1 var(--sans);text-decoration:none;border:1px solid transparent;cursor:pointer;transition:transform .25s ease,box-shadow .25s ease,background .25s,color .25s,border-color .25s}
+.btn svg{width:16px;height:16px;transition:transform .25s}
+.btn-primary{background:var(--ink);color:#fff}
+.btn-primary:hover{background:var(--accent);box-shadow:0 10px 24px -10px rgba(236,28,8,.6);transform:translateY(-2px)}
+.btn-primary:hover svg{transform:translateX(3px)}
+.btn-grad{background:var(--gradb);color:#fff;text-shadow:0 1px 1px rgba(120,20,0,.35)}
+.btn-grad:hover{transform:translateY(-2px);box-shadow:0 10px 24px -10px rgba(236,28,8,.7)}
+.btn-ghost{border-color:var(--ink);color:var(--ink);background:transparent}
+.btn-ghost:hover{background:var(--ink);color:#fff}
+.link-u{font-weight:500;text-decoration:none;background:linear-gradient(var(--ink),var(--ink)) 0 100%/100% 1px no-repeat;padding-bottom:2px;min-height:44px;display:inline-flex;align-items:center;transition:background-size .3s}
+.link-u:hover{background-image:var(--grad);background-size:100% 2px}
+
+/* Header */
+.top{position:sticky;top:0;z-index:50;background:rgba(247,243,236,.82);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid transparent;transition:border-color .3s}
+.top.scrolled{border-color:var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+.mark{font:italic 400 30px/1 var(--serif);text-decoration:none;letter-spacing:-.02em;display:inline-flex;align-items:center;gap:2px;min-height:44px}
+.mark span{background:var(--gradt);-webkit-background-clip:text;background-clip:text;color:transparent}
+.nav{display:flex;align-items:center;gap:6px}
+.nav a.nl{font-size:15px;text-decoration:none;color:var(--ink-2);padding:0 14px;min-height:44px;display:inline-flex;align-items:center;position:relative}
+.nav a.nl::after{content:"";position:absolute;left:14px;right:14px;bottom:10px;height:2px;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.nav a.nl:hover{color:var(--ink)}
+.nav a.nl:hover::after{transform:scaleX(1)}
+.nav .btn{min-height:42px;padding:0 18px;font-size:14px;margin-left:10px}
+.burger{display:none;width:44px;height:44px;border:0;background:transparent;border-radius:50%;cursor:pointer;position:relative;z-index:61}
+.burger span{position:absolute;left:11px;right:11px;height:1.5px;background:var(--ink);transition:transform .3s,top .3s,opacity .2s}
+.burger span:nth-child(1){top:17px}.burger span:nth-child(2){top:26px}
+.menu-open .burger span:nth-child(1){top:21.5px;transform:rotate(45deg)}
+.menu-open .burger span:nth-child(2){top:21.5px;transform:rotate(-45deg)}
+.mobile-menu{position:fixed;inset:0;z-index:60;background:var(--bg);padding:96px var(--gut) 40px;display:flex;flex-direction:column;justify-content:space-between;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.menu-open .mobile-menu{opacity:1;visibility:visible}
+.menu-open{overflow:hidden}
+.mobile-menu ol{list-style:none;margin:0;padding:0;counter-reset:m}
+.mobile-menu li{border-bottom:1px solid var(--line)}
+.mobile-menu ol a{display:flex;align-items:baseline;gap:16px;font:400 52px/1.15 var(--serif);text-decoration:none;padding:10px 0}
+.mobile-menu ol a::before{counter-increment:m;content:"0" counter(m);font:500 12px/1 var(--sans);color:var(--muted);letter-spacing:.1em}
+.mobile-menu .mm-foot{display:flex;flex-direction:column;gap:14px;font-size:15px;color:var(--ink-2)}
+.mobile-menu .mm-foot .btn{align-self:flex-start}
+
+/* Hero */
+.hero{padding:clamp(40px,6vw,80px) 0 clamp(64px,8vw,120px)}
+.hero .wrap{display:grid;grid-template-columns:1.35fr .9fr;gap:clamp(32px,6vw,96px);align-items:center}
+.hero h1{font-size:clamp(52px,7vw,104px);line-height:1;letter-spacing:-.025em}
+.hl{position:relative;white-space:nowrap;font-style:italic}
+.hl::after{content:"";position:absolute;left:2%;right:0;bottom:-.02em;height:.065em;background:var(--grad);border-radius:99px;transform-origin:left;animation:draw 1.1s .5s cubic-bezier(.6,.1,.2,1) both}
+@keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.hero .sub{font-size:clamp(17px,1.4vw,19px);color:var(--ink-2);max-width:560px;margin:32px 0 40px}
+.ctas{display:flex;flex-wrap:wrap;align-items:center;gap:12px 14px}
+.ctas .link-u{margin-left:10px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:44px;font-size:14px;color:var(--muted)}
+.hero-meta span{display:inline-flex;align-items:center;gap:8px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--grad);display:inline-block}
+.portrait{position:relative;justify-self:end;width:100%;max-width:440px}
+.arch{aspect-ratio:4/5;border-radius:999px 999px 28px 28px;overflow:hidden;background:var(--bg-2);position:relative}
+.arch img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.portrait::before{content:"";position:absolute;inset:-14px -14px 26px 26px;border:1px solid var(--line);border-radius:999px 999px 34px 34px;z-index:-1}
+.tag-float{position:absolute;left:-28px;bottom:42px;background:var(--paper);border-radius:999px;padding:12px 18px 12px 14px;font-size:13px;box-shadow:0 20px 40px -24px rgba(40,25,10,.35);display:flex;align-items:center;gap:10px;border:1px solid var(--line)}
+.tag-float b{font-weight:600}
+
+/* Glance */
+.glance{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.glance ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr)}
+.glance li{padding:40px 28px 44px;border-left:1px solid var(--line)}
+.glance li:first-child{border-left:0;padding-left:0}
+.glance .big{font:400 clamp(48px,5vw,72px)/1 var(--serif);display:block;margin-bottom:14px;letter-spacing:-.02em}
+.glance .big em{background:var(--gradt);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.08em}
+.glance p{margin:0;font-size:15px;color:var(--ink-2);max-width:260px}
+
+.clients{padding:40px 0;overflow:hidden}
+.clients .lab{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-align:center;margin:0 0 18px}
+.marquee{display:flex;width:max-content;animation:mq 42s linear infinite}
+.marquee:hover{animation-play-state:paused}
+.marquee ul{list-style:none;display:flex;margin:0;padding:0}
+.marquee li{font:400 clamp(24px,2.4vw,34px)/1.2 var(--serif);color:var(--ink-2);padding:0 28px;white-space:nowrap;display:flex;align-items:center;gap:56px}
+.marquee li::after{content:"✦";font-size:14px;color:var(--g1)}
+.marquee li{gap:0}.marquee li::after{margin-left:56px}
+@keyframes mq{to{transform:translateX(-50%)}}
+.clients-mask{-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+
+/* Sections */
+section.s{padding:clamp(80px,11vw,160px) 0}
+.s-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin-bottom:clamp(40px,5vw,64px);flex-wrap:wrap}
+
+/* About */
+.about .wrap{display:grid;grid-template-columns:1fr 1.4fr;gap:clamp(32px,6vw,96px)}
+.about .lede{font:400 clamp(28px,3vw,40px)/1.25 var(--serif);margin:0 0 28px;letter-spacing:-.01em}
+.about p{color:var(--ink-2);font-size:17px;margin:0 0 20px;max-width:640px}
+.tools{margin-top:40px}
+.tools h3{font:500 12px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:0}
+.chips li{font-size:14px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:var(--paper)}
+
+/* Work */
+.work{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.chip{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:transparent;font:500 14px/1 var(--sans);color:var(--ink-2);cursor:pointer;transition:all .2s}
+.chip:hover{border-color:var(--ink);color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.chip .n{opacity:.6;margin-left:6px;font-size:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,4vw,56px) clamp(24px,3vw,40px)}
+.card{text-decoration:none;display:block;color:inherit}
+.card[hidden]{display:none}
+.thumb{position:relative;aspect-ratio:4/3;border-radius:var(--r);overflow:hidden;display:grid;place-items:center;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.thumb .ico{width:clamp(64px,7vw,96px);height:clamp(64px,7vw,96px);color:rgba(22,19,15,.78);transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.thumb .imglab{position:absolute;left:16px;top:16px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:rgba(255,253,249,.8);padding:6px 10px;border-radius:999px;color:var(--ink-2)}
+.thumb .feat{position:absolute;right:16px;top:16px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:#fff;padding:6px 10px;border-radius:999px}
+.t-el{background:radial-gradient(circle at 75% 25%,#ffd7a8 0,transparent 55%),repeating-linear-gradient(135deg,#ffe8cc 0 14px,#ffe1bd 14px 28px)}
+.t-vi{background:radial-gradient(circle at 30% 70%,#ffb38a 0,transparent 60%),linear-gradient(160deg,#ffd9c2,#ffc7a6)}
+.t-on{background:radial-gradient(circle at 70% 70%,#d9e6f2 0,transparent 55%),radial-gradient(#cddbe9 1.5px,transparent 1.6px) 0 0/18px 18px,#e9f0f7}
+.t-we{background:linear-gradient(0deg,rgba(255,255,255,.0),rgba(255,255,255,.0)),repeating-linear-gradient(0deg,#ece4d6 0 1px,transparent 1px 24px),repeating-linear-gradient(90deg,#ece4d6 0 1px,transparent 1px 24px),#f4eee3}
+.card:hover .thumb{transform:translateY(-6px)}
+.card:hover .thumb .ico{transform:scale(1.08) rotate(-3deg)}
+.card-body{display:grid;grid-template-columns:1fr auto;gap:6px 20px;padding-top:22px}
+.cat{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:500}
+.card h3{font-size:clamp(28px,2.6vw,36px);line-height:1.1;grid-column:1}
+.card p{grid-column:1;margin:4px 0 0;color:var(--ink-2);font-size:15.5px;max-width:520px}
+.card .tools-l{grid-column:1;font-size:13px;color:var(--muted);margin-top:6px}
+.arrow{grid-column:2;grid-row:1/span 3;align-self:start;width:52px;height:52px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:all .3s}
+.arrow svg{width:18px;height:18px;transition:transform .3s}
+.card:hover .arrow{background:var(--grad);border-color:transparent;color:#fff}
+.card:hover .arrow svg{transform:rotate(-45deg)}
+.empty{color:var(--muted)}
+
+/* Process */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--ink)}
+.steps li{padding:28px 28px 0 0;position:relative}
+.steps li+li{padding-left:28px;border-left:1px solid var(--line)}
+.steps .num{font:italic 400 64px/1 var(--serif);display:block;margin-bottom:28px;background:var(--gradt);-webkit-background-clip:text;background-clip:text;color:transparent;width:max-content;padding-right:.1em}
+.steps h3{font-size:30px;line-height:1.1;margin-bottom:14px}
+.steps p{margin:0;color:var(--ink-2);font-size:15.5px}
+
+/* Experience */
+.exp .wrap{display:grid;grid-template-columns:1fr 1.6fr;gap:clamp(32px,6vw,96px)}
+.exp .side p{color:var(--ink-2);max-width:340px;margin:24px 0 28px}
+.tl{list-style:none;margin:0;padding:0}
+.tl li{display:grid;grid-template-columns:150px 1fr;gap:24px;padding:26px 0;border-top:1px solid var(--line);position:relative;transition:padding .3s}
+.tl li:last-child{border-bottom:1px solid var(--line)}
+.tl time{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:6px}
+.tl h3{font-size:28px;line-height:1.15}
+.tl .org{color:var(--ink-2);font-size:15.5px;margin-top:4px}
+.tl li.now time{color:var(--accent);font-weight:500}
+.tl li.now time::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--grad);margin-right:8px;vertical-align:1px;box-shadow:0 0 0 4px rgba(255,153,26,.18)}
+.tl li::after{content:"";position:absolute;left:0;top:-1px;height:1px;width:100%;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform .5s}
+.tl li:hover::after{transform:scaleX(1)}
+
+/* Contact */
+.contact{background:var(--ink);color:#f7f3ec}
+.contact .eyebrow{color:#b8afa3}
+.contact .wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(40px,6vw,96px)}
+.contact h2{font-size:clamp(48px,6.4vw,96px)}
+.contact h2 em{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.06em}
+.c-list{list-style:none;margin:40px 0 32px;padding:0}
+.c-list li{border-top:1px solid #3a342d}
+.c-list li:last-child{border-bottom:1px solid #3a342d}
+.c-list a,.c-list span.row{display:flex;justify-content:space-between;gap:16px;padding:18px 0;text-decoration:none;min-height:44px;align-items:center;flex-wrap:wrap}
+.c-list small{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#b8afa3}
+.c-list a:hover .v{color:var(--g1)}
+.v{font-size:17px;transition:color .2s;word-break:break-word}
+form{display:grid;gap:18px;align-content:start}
+label{font-size:13px;letter-spacing:.06em;color:#cfc6b9;display:grid;gap:8px}
+input,textarea{font:400 16px/1.4 var(--sans);color:#fff;background:transparent;border:0;border-bottom:1px solid #574f45;padding:12px 0;border-radius:0;transition:border-color .2s;width:100%}
+textarea{min-height:130px;resize:vertical}
+input:focus,textarea:focus{outline:none;border-bottom-color:var(--g1)}
+input:focus-visible,textarea:focus-visible{outline:none;box-shadow:0 2px 0 0 var(--g1)}
+form .btn{justify-self:start;margin-top:10px}
+.sent{font-size:14px;color:#ffc58a;min-height:20px;margin:0}
+.contact .btn-ghost{border-color:#f7f3ec;color:#f7f3ec}
+.contact .btn-ghost:hover{background:#f7f3ec;color:var(--ink)}
+.contact :focus-visible{outline-color:var(--g1)}
+footer{background:var(--ink);color:#b8afa3;font-size:14px;border-top:1px solid #3a342d}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:28px;padding-bottom:28px}
+footer a{text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
+footer a:hover{color:#fff}
+
+.badge{position:fixed;right:16px;bottom:16px;z-index:70;background:var(--ink);color:#fff;font:500 12px/1 var(--sans);padding:10px 14px;border-radius:999px;box-shadow:0 10px 30px -10px rgba(0,0,0,.4);display:flex;align-items:center;gap:8px;pointer-events:none}
+.badge::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--grad)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.no-js .rv{opacity:1;transform:none}
+
+@media (max-width:1080px){
+  .glance ul{grid-template-columns:1fr 1fr}
+  .glance li:nth-child(3){border-left:0;padding-left:0}
+  .glance li:nth-child(n+3){border-top:1px solid var(--line)}
+  .steps{grid-template-columns:1fr 1fr;border-top:0}
+  .steps li,.steps li+li{border-top:1px solid var(--ink);padding:28px 28px 44px 0;border-left:0}
+  .steps li:nth-child(even){padding-left:28px;border-left:1px solid var(--line)}
+}
+@media (max-width:900px){
+  .nav a.nl,.nav .btn{display:none}
+  .burger{display:block}
+  .hero .wrap{grid-template-columns:1fr}
+  .portrait{justify-self:start;max-width:360px;order:-1;margin-left:14px}
+  .about .wrap,.exp .wrap,.contact .wrap{grid-template-columns:1fr}
+}
+@media (max-width:720px){
+  .grid{grid-template-columns:1fr}
+  .tl li{grid-template-columns:1fr;gap:6px}
+  .tl time{padding-top:0}
+}
+@media (max-width:560px){
+  .glance li{padding:24px 0 26px 16px}
+  .glance li:nth-child(odd){padding-left:0;padding-right:12px}
+  .glance .big{font-size:34px;margin-bottom:10px}
+  .glance p{font-size:13.5px;line-height:1.5}
+  .steps{grid-template-columns:1fr}
+  .steps li,.steps li+li,.steps li:nth-child(even){padding:24px 0 36px;border-left:0}
+  .steps .num{font-size:52px;margin-bottom:16px}
+  .hero h1{font-size:clamp(46px,13vw,64px)}
+  .hl{white-space:normal}
+  .portrait{max-width:260px}
+  .tag-float{left:-12px;bottom:24px}
+  .ctas .btn{flex:1 1 auto;justify-content:center}
+  .ctas .link-u{margin-left:0}
+  .arrow{width:44px;height:44px}
+  .mobile-menu ol a{font-size:44px}
+  .badge{right:10px;bottom:10px;font-size:11px;padding:8px 12px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .marquee{animation:none;flex-wrap:wrap;width:auto;justify-content:center}
+  .marquee ul[aria-hidden]{display:none}
+  .marquee ul{flex-wrap:wrap;justify-content:center}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body class="no-js">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="mark" href="#top" aria-label="Michal Kleinboim, home">M<span>K</span></a>
+    <nav class="nav" aria-label="Primary">
+      <a class="nl" href="#work">Work</a>
+      <a class="nl" href="#about">About</a>
+      <a class="nl" href="#experience">Experience</a>
+      <a class="nl" href="#contact">Contact</a>
+      <a class="btn btn-grad" href="#" download>Download CV</a>
+      <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mmenu"><span></span><span></span></button>
+    </nav>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mmenu" role="dialog" aria-modal="true" aria-label="Menu">
+  <ol>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+  <div class="mm-foot">
+    <a class="btn btn-grad" href="#" download>Download CV</a>
+    <a href="mailto:Michal.kleinboim@gmail.com">Michal.kleinboim@gmail.com</a>
+    <a href="tel:+972503478599">+972 50-347-8599</a>
+  </div>
+</div>
+
+<main id="main">
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Michal Kleinboim · L&amp;D · Instructional Design</p>
+        <h1 id="hero-h">I design learning that moves the <span class="hl">business</span> forward.</h1>
+        <p class="sub">L&amp;D and instructional-design specialist with 5+ years building end-to-end learning programs: from needs analysis to AI-powered courseware, video and onboarding, for global, matrixed and public-sector organizations.</p>
+        <div class="ctas">
+          <a class="btn btn-primary" href="#work">View my work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-ghost" href="#" download>Download CV</a>
+          <a class="link-u" href="#contact">Get in touch</a>
+        </div>
+        <div class="hero-meta">
+          <span><i class="dot" aria-hidden="true"></i> Petah Tikva, Israel</span>
+          <span>Learning &amp; Development · Instructional Design Specialist</span>
+        </div>
+      </div>
+      <figure class="portrait" style="margin:0">
+        <div class="arch"><img src="../assets/michal.jpg" alt="Portrait of Michal Kleinboim, smiling" width="670" height="670"></div>
+        <figcaption class="tag-float"><i class="dot" aria-hidden="true"></i><span><b>M.A.</b> Educational Technologies</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="glance" aria-label="At a glance">
+    <div class="wrap">
+      <ul>
+        <li class="rv"><span class="big"><em>5+</em> years</span><p>in Learning &amp; Development</p></li>
+        <li class="rv"><span class="big">From <em>zero</em></span><p>Built an L&amp;D function from the ground up (IT division, Israel Fire &amp; Rescue Authority)</p></li>
+        <li class="rv"><span class="big"><em>AI</em> series</span><p>Directed an AI-in-teaching video series for Microsoft Education IL</p></li>
+        <li class="rv"><span class="big"><em>M.A.</em></span><p>Educational Technologies, Learning Design</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="clients" aria-label="Trusted by">
+    <p class="lab">Trusted by · worked with</p>
+    <div class="clients-mask">
+      <div class="marquee">
+        <ul>
+          <li>Microsoft Education IL</li><li>El Al Security (via Ofek Array)</li><li>Israel Fire &amp; Rescue Authority</li><li>Maytronics</li><li>HIT</li><li>Yehud Education Dept.</li>
+        </ul>
+        <ul aria-hidden="true">
+          <li>Microsoft Education IL</li><li>El Al Security (via Ofek Array)</li><li>Israel Fire &amp; Rescue Authority</li><li>Maytronics</li><li>HIT</li><li>Yehud Education Dept.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="s work" id="work" aria-labelledby="work-h">
+    <div class="wrap">
+      <div class="s-head">
+        <div>
+          <p class="eyebrow">Selected work</p>
+          <h2 id="work-h">Learning, <em>made</em> memorable.</h2>
+        </div>
+        <div class="filters" role="group" aria-label="Filter projects">
+          <button class="chip" aria-pressed="true" data-f="all">All</button>
+          <button class="chip" aria-pressed="false" data-f="E-learning">E-learning</button>
+          <button class="chip" aria-pressed="false" data-f="Onboarding">Onboarding</button>
+          <button class="chip" aria-pressed="false" data-f="Video">Video</button>
+          <button class="chip" aria-pressed="false" data-f="Web &amp; Marketing">Web &amp; Marketing</button>
+        </div>
+      </div>
+      <p class="sr" id="fstatus" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></p>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="s about" id="about" aria-labelledby="about-h">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">About</p>
+        <h2 id="about-h">Strategy, <em>craft</em> &amp; tech.</h2>
+      </div>
+      <div class="rv">
+        <p class="lede">I turn ideas into scalable programs and employee experiences that people actually remember.</p>
+        <p>I'm a Learning &amp; Development professional with a strong technological sense, a problem-solver's mindset and a strategic view. I lead L&amp;D initiatives end-to-end and align them with business priorities, working with cross-functional and global teams.</p>
+        <div class="tools">
+          <h3>Tools I work with</h3>
+          <ul class="chips">
+            <li>Articulate Storyline</li><li>Genially</li><li>Camtasia</li><li>Vyond</li><li>Moodle</li><li>Figma</li><li>After Effects</li><li>Illustrator</li><li>Photoshop</li><li>Canva</li><li>Gemini</li><li>NotebookLM</li><li>Claude</li><li>VEO 3</li><li>Monday</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s process" aria-labelledby="proc-h" style="padding-top:0">
+    <div class="wrap">
+      <div class="s-head">
+        <div>
+          <p class="eyebrow">How I work</p>
+          <h2 id="proc-h">Four steps, <em>one</em> goal.</h2>
+        </div>
+      </div>
+      <ol class="steps">
+        <li class="rv"><span class="num" aria-hidden="true">01</span><h3>Analyze needs</h3><p>I start with the business: goals, audiences and performance gaps. A systemic needs analysis keeps every initiative focused on real organizational change.</p></li>
+        <li class="rv"><span class="num" aria-hidden="true">02</span><h3>Design solutions</h3><p>I design learning programs, onboarding journeys and scalable training structures around those needs, so the experience feels seamless and drives performance.</p></li>
+        <li class="rv"><span class="num" aria-hidden="true">03</span><h3>Develop &amp; execute</h3><p>I build interactive courseware, videos and resources, using multimedia and AI tools to speed up production without losing quality.</p></li>
+        <li class="rv"><span class="num" aria-hidden="true">04</span><h3>Evaluate &amp; refine</h3><p>I gather feedback, analyze outcomes and run QA reviews, then iterate until the solution meets and exceeds its objectives.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="s exp" id="experience" aria-labelledby="exp-h" style="padding-top:0">
+    <div class="wrap">
+      <div class="side">
+        <p class="eyebrow">Experience</p>
+        <h2 id="exp-h">Where I've <em>built</em>.</h2>
+        <p>Instructional design and L&amp;D roles across security, public sector, ed-tech and higher education.</p>
+        <a class="btn btn-ghost" href="#" download>Download full CV</a>
+      </div>
+      <ol class="tl">
+        <li class="now rv"><time>2026 – Present</time><div><h3>Instructional Designer</h3><p class="org">Ofek Array · El Al Security instruction dept.</p></div></li>
+        <li class="rv"><time>2025 – 2026</time><div><h3>Instructional Design Specialist</h3><p class="org">G-NESS · on-site at Israel Fire &amp; Rescue Authority</p></div></li>
+        <li class="rv"><time>2022 – 2025</time><div><h3>Instructional Designer &amp; Projects Lead</h3><p class="org">T.MORE Advanced Learning Solutions</p></div></li>
+        <li class="rv"><time>2022</time><div><h3>Instructional Designer</h3><p class="org">HIT · Center for the Advancement of Teaching</p></div></li>
+        <li class="rv"><time>2014 – 2016</time><div><h3>Arabic Instructor, Commander's Course</h3><p class="org">IDF Unit 8200</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="s contact" id="contact" aria-labelledby="contact-h">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h2 id="contact-h">Let's build learning that <em>works.</em></h2>
+        <ul class="c-list">
+          <li><a href="mailto:Michal.kleinboim@gmail.com"><small>Email</small><span class="v">Michal.kleinboim@gmail.com</span></a></li>
+          <li><a href="tel:+972503478599"><small>Phone</small><span class="v">+972 50-347-8599</span></a></li>
+          <li><a href="#"><small>LinkedIn</small><span class="v">Michal Kleinboim ↗</span></a></li>
+          <li><span class="row"><small>Based in</small><span class="v">Petah Tikva, Israel</span></span></li>
+        </ul>
+        <a class="btn btn-grad" href="#" download>Download CV</a>
+      </div>
+      <form id="cform" novalidate>
+        <label>Name<input name="name" autocomplete="name" required></label>
+        <label>Email<input type="email" name="email" autocomplete="email" required></label>
+        <label>Message<textarea name="message" required></textarea></label>
+        <button class="btn btn-grad" type="submit">Send message <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <p class="sent" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Michal Kleinboim</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<div class="badge" aria-hidden="true">Direction B: Modern editorial</div>
+
+<script>
+document.body.classList.remove('no-js');
+const ICONS={
+  'E-learning':'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="12" width="48" height="32" rx="4"/><path d="M22 52h20M32 44v8"/><path d="M28 22l10 6-10 6z"/></svg>',
+  'Video':'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="16" width="38" height="32" rx="5"/><path d="M44 28l14-8v24l-14-8z"/><circle cx="18" cy="28" r="3"/></svg>',
+  'Onboarding':'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 50h14V38h14V26h16"/><circle cx="17" cy="26" r="5"/><path d="M50 18l4 8-4 8"/></svg>',
+  'Web & Marketing':'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="10" width="52" height="40" rx="5"/><path d="M6 20h52"/><circle cx="12" cy="15" r="1"/><circle cx="17" cy="15" r="1"/><path d="M16 30h18M16 38h12"/><rect x="40" y="28" width="10" height="14" rx="2"/></svg>'
+};
+const CLS={'E-learning':'t-el','Video':'t-vi','Onboarding':'t-on','Web & Marketing':'t-we'};
+const P=[
+ ['Cyber Security Courseware','E-learning','Turned mandatory security training into an engaging, story-driven course with point-of-view videos starring real employees.','Storyline',1],
+ ['AI for Teachers: Microsoft Education IL','Video',"A promo and training video series encouraging teaching staff to adopt AI tools, released during the Ministry of Education's AI Week.",'Premiere Pro · After Effects · Illustrator'],
+ ['Maytronics Onboarding Kit','Onboarding','A needs-based welcome journey for new hires at a global high-tech manufacturer, on desktop and mobile.','Genially · M.A. thesis'],
+ ['“Love Thy Neighbor”: Academic Course','E-learning','Adapted a debate-heavy in-person Judaism course at HIT into interactive online courseware with built-in assessment.','Storyline · Moodle'],
+ ['Work Safety Videos','Video','Animated videos for a regulation-compliant work-safety course.','Vyond'],
+ ['Social Media Videos','Web & Marketing','Short videos produced for Facebook marketing campaigns.','Create Studio'],
+ ['Raftique Picnic: Business Website','Web & Marketing',"Ran a picnic business's website end-to-end: photo shoots, image editing and marketing strategy.",'Wix'],
+ ['Nike Gloves: Landing Page Concept','Web & Marketing','Concept landing page for sports gloves, designed during graphic design studies.','Figma']
+];
+const grid=document.getElementById('grid');
+grid.innerHTML=P.map(([t,c,d,tl,f])=>`<a class="card rv" href="case.html" data-cat="${c}">
+  <div class="thumb ${CLS[c]}"><span class="imglab">Image</span>${f?'<span class="feat">Case study</span>':''}<span class="ico" aria-hidden="true">${ICONS[c]}</span></div>
+  <div class="card-body"><span class="cat">${c}</span><h3>${t}</h3><p>${d}</p><span class="tools-l">${tl}</span>
+  <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></a>`).join('');
+// counts
+document.querySelectorAll('.chip').forEach(b=>{const f=b.dataset.f;const n=f==='all'?P.length:P.filter(p=>p[1]===f).length;b.insertAdjacentHTML('beforeend',`<span class="n" aria-hidden="true">${n}</span>`)});
+document.querySelector('.filters').addEventListener('click',e=>{
+  const b=e.target.closest('.chip');if(!b)return;
+  document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  let n=0;grid.querySelectorAll('.card').forEach(c=>{const show=b.dataset.f==='all'||c.dataset.cat===b.dataset.f;c.hidden=!show;if(show){n++;c.classList.add('in')}});
+  document.getElementById('fstatus').textContent=n+' projects shown';
+});
+// menu
+const burger=document.querySelector('.burger');
+function setMenu(o){document.body.classList.toggle('menu-open',o);burger.setAttribute('aria-expanded',o);burger.setAttribute('aria-label',o?'Close menu':'Open menu');}
+burger.addEventListener('click',()=>setMenu(!document.body.classList.contains('menu-open')));
+document.querySelectorAll('#mmenu a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false)});
+// header
+const hdr=document.querySelector('.top');addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>8),{passive:true});
+// reveal
+const io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}}),{rootMargin:'0px 0px -8% 0px'}):null;
+document.querySelectorAll('.rv').forEach(el=>io?io.observe(el):el.classList.add('in'));
+// form
+document.getElementById('cform').addEventListener('submit',e=>{e.preventDefault();e.target.querySelector('.sent').textContent='Thanks! This is a mockup, so nothing was sent.'});
+</script>
+</body>
+</html>

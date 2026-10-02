@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Michal Kleinboim · Learning & Development</title>
+<meta name="description" content="Michal Kleinboim: Learning & Development and Instructional Design Specialist. Portfolio, process, experience and contact.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0f14; --bg-2:#11141b; --surface:rgba(255,255,255,.035); --surface-2:rgba(255,255,255,.06);
+  --border:rgba(255,255,255,.09); --border-2:rgba(255,255,255,.16);
+  --text:#eef0f5; --muted:#a6adbd; --dim:#7f8798;
+  --o:#ff991a; --r:#ec1c08; --m:#e0307a;
+  --grad:linear-gradient(100deg,#ff991a 0%,#f5531a 50%,#ec1c08 100%);
+  --grad-wide:linear-gradient(100deg,#ff991a 0%,#f0401a 55%,#e0307a 100%);
+  --grad-text:linear-gradient(100deg,#ffb04a 0%,#ff6a3d 55%,#ff5c96 100%);
+  --radius:20px; --radius-sm:12px;
+  --head:"Space Grotesk",system-ui,sans-serif; --body:"Inter",system-ui,sans-serif;
+  --max:1200px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.6 var(--body);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:var(--head);line-height:1.1;margin:0;letter-spacing:-.02em}
+p{margin:0}
+:focus-visible{outline:2px solid #ffb04a;outline-offset:3px;border-radius:8px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:12px;top:-60px;z-index:100;background:#fff;color:#000;padding:10px 14px;border-radius:8px;font-weight:600}
+.skip:focus{top:12px}
+.grad-text{background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 22px;border-radius:999px;font:600 15px/1 var(--body);text-decoration:none;border:1px solid transparent;cursor:pointer;transition:transform .2s ease,box-shadow .25s ease,background .25s ease,border-color .25s ease;white-space:nowrap}
+.btn svg{width:18px;height:18px;flex:none}
+.btn-grad{background:var(--grad);color:#14080a;box-shadow:0 8px 28px -10px rgba(236,60,20,.7)}
+.btn-grad:hover{transform:translateY(-2px);box-shadow:0 14px 36px -10px rgba(236,60,20,.85)}
+.btn-ghost{background:var(--surface-2);border-color:var(--border-2);color:var(--text)}
+.btn-ghost:hover{border-color:rgba(255,153,26,.6);transform:translateY(-2px)}
+.btn-link{color:var(--text);padding:0 6px;min-height:46px;display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-weight:500}
+.btn-link span{border-bottom:1px solid rgba(255,153,26,.6);padding-bottom:2px}
+.btn-link:hover span{border-color:#ffb04a}
+
+/* Header */
+.top{position:sticky;top:0;z-index:50;background:rgba(13,15,20,.72);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);border-bottom:1px solid var(--border)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.mk{display:inline-flex;align-items:center;gap:10px;text-decoration:none;min-height:44px}
+.mk b{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--grad);color:#14080a;font:700 17px/1 var(--head);letter-spacing:-.04em;transform:rotate(-4deg)}
+.mk span{font:600 15px/1.1 var(--head);letter-spacing:-.01em}
+.mk small{display:block;font:400 12px/1.2 var(--body);color:var(--muted);letter-spacing:0}
+.nav{display:flex;align-items:center;gap:6px}
+.nav a.l{color:var(--muted);text-decoration:none;font-weight:500;font-size:15px;padding:0 12px;min-height:44px;display:inline-flex;align-items:center;border-radius:999px;transition:color .2s,background .2s}
+.nav a.l:hover{color:var(--text);background:var(--surface-2)}
+.nav .btn{margin-left:8px;min-height:42px;padding:0 18px;font-size:14px}
+.burger{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--border-2);background:var(--surface-2);color:var(--text);cursor:pointer;align-items:center;justify-content:center}
+.burger svg{width:22px;height:22px}
+@media (max-width:900px){
+  .burger{display:inline-flex}
+  .nav{position:absolute;left:0;right:0;top:68px;flex-direction:column;align-items:stretch;gap:4px;padding:12px 16px 20px;background:rgba(13,15,20,.97);border-bottom:1px solid var(--border);display:none}
+  .nav.open{display:flex}
+  .nav a.l{min-height:48px;font-size:16px;padding:0 14px}
+  .nav .btn{margin:8px 0 0}
+}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;padding:88px 0 96px;isolation:isolate}
+.blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.5;z-index:-1;pointer-events:none}
+.b1{width:560px;height:560px;background:radial-gradient(circle,#ff8a1a 0%,transparent 65%);top:-160px;right:-120px}
+.b2{width:520px;height:520px;background:radial-gradient(circle,#ec1c08 0%,transparent 65%);top:120px;right:240px;opacity:.32}
+.b3{width:480px;height:480px;background:radial-gradient(circle,#c4206a 0%,transparent 65%);bottom:-220px;left:-120px;opacity:.35}
+.grid-bg{position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse at 60% 40%,#000 0%,transparent 70%);mask-image:radial-gradient(ellipse at 60% 40%,#000 0%,transparent 70%)}
+.hero .wrap{display:grid;grid-template-columns:1.25fr .9fr;gap:56px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:7px 14px 7px 8px;border-radius:999px;background:var(--surface-2);border:1px solid var(--border-2);font-size:13.5px;color:var(--muted);margin-bottom:26px}
+.eyebrow i{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--grad)}
+.eyebrow i svg{width:12px;height:12px;color:#14080a}
+.hero h1{font-size:clamp(40px,6.2vw,76px);font-weight:600;letter-spacing:-.035em;line-height:1.02}
+.hero .sub{margin-top:24px;font-size:clamp(16px,1.6vw,18.5px);color:var(--muted);max-width:580px;line-height:1.65}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px;align-items:center}
+.meta-line{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:34px;color:var(--dim);font-size:14px}
+.meta-line span{display:inline-flex;align-items:center;gap:7px}
+.meta-line svg{width:15px;height:15px;color:#ff8a3d}
+
+.portrait{position:relative;justify-self:center;width:min(100%,400px);aspect-ratio:1}
+.ring{position:absolute;inset:0;border-radius:50%;padding:3px;background:conic-gradient(from 200deg,#ff991a,#ec1c08,#e0307a,#ff991a);box-shadow:0 0 80px -10px rgba(240,80,30,.55)}
+.ring::after{content:"";position:absolute;inset:-18px;border-radius:50%;border:1px dashed rgba(255,255,255,.12)}
+.ring img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:6px solid var(--bg)}
+.chip{position:absolute;display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;background:rgba(20,23,31,.82);border:1px solid var(--border-2);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font:500 14px/1 var(--body);white-space:nowrap;box-shadow:0 10px 30px -12px rgba(0,0,0,.6);animation:float 6s ease-in-out infinite}
+.chip i{width:8px;height:8px;border-radius:50%;background:var(--grad);box-shadow:0 0 10px rgba(255,120,40,.8)}
+.chip.c1{top:8%;left:-10%}
+.chip.c2{top:44%;right:-12%;animation-delay:-2s}
+.chip.c3{bottom:6%;left:2%;animation-delay:-4s}
+.chip.c4{top:-2%;right:6%;animation-delay:-3s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* Sections */
+section{scroll-margin-top:80px}
+.sec{padding:96px 0}
+.sec-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px 40px;margin-bottom:40px}
+.kicker{display:inline-flex;align-items:center;gap:10px;font:500 13px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#ffab5e;margin-bottom:14px}
+.kicker::before{content:"";width:28px;height:2px;border-radius:2px;background:var(--grad)}
+.sec h2{font-size:clamp(30px,4vw,46px);font-weight:600}
+.sec-head p{max-width:440px;color:var(--muted)}
+
+.glass{background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.02));border:1px solid var(--border);border-radius:var(--radius);position:relative}
+
+/* Bento */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(170px,auto);gap:16px}
+.tile{padding:26px;display:flex;flex-direction:column;justify-content:space-between;gap:18px;overflow:hidden;transition:border-color .3s,transform .3s}
+.tile:hover{border-color:var(--border-2)}
+.tile .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:rgba(255,140,40,.1);border:1px solid rgba(255,140,40,.25);color:#ffa25a}
+.tile .ic svg{width:20px;height:20px}
+.tile h3{font-size:20px;font-weight:600;line-height:1.25}
+.tile p{color:var(--muted);font-size:15px}
+.t-about{grid-column:span 2;grid-row:span 2;justify-content:flex-start}
+.t-about p.lead{font:400 clamp(19px,2vw,23px)/1.5 var(--head);color:var(--text);letter-spacing:-.01em}
+.t-about p.lead em{font-style:normal}
+.t-about .sig{margin-top:auto;display:flex;align-items:center;gap:12px;padding-top:20px;border-top:1px solid var(--border);color:var(--muted);font-size:14px}
+.t-about .sig img{width:40px;height:40px;border-radius:50%;object-fit:cover}
+.big{font:600 64px/1 var(--head);letter-spacing:-.04em}
+.t-ai{grid-column:span 2;background:radial-gradient(120% 140% at 100% 0%,rgba(236,40,30,.22),transparent 55%),linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.02))}
+.t-ai .row{display:flex;gap:20px;align-items:flex-end;justify-content:space-between}
+.tag{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;font-size:12.5px;font-weight:500;background:rgba(255,255,255,.06);border:1px solid var(--border-2);color:var(--muted)}
+.t-build{grid-column:span 2}
+.t-cta{grid-column:span 2;flex-direction:row;align-items:center;flex-wrap:wrap;background:linear-gradient(110deg,rgba(255,153,26,.14),rgba(236,28,8,.12) 60%,rgba(224,48,122,.12))}
+.t-cta h3{font-size:22px}
+.t-cta .btns{display:flex;gap:10px;flex-wrap:wrap}
+
+.logos{margin-top:48px;display:flex;flex-wrap:wrap;align-items:center;gap:14px 40px;justify-content:center;padding:26px 24px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.logos .lbl{flex-basis:100%;text-align:center;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
+.logos span.n{font:600 17px/1.2 var(--head);color:#8f96a6;letter-spacing:-.01em;transition:color .2s;text-align:center}
+.logos span.n:hover{color:var(--text)}
+.logos span.n small{font:400 13px var(--body);color:var(--dim)}
+
+/* Flow */
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative;counter-reset:s}
+.flow::before{content:"";position:absolute;top:27px;left:12.5%;right:12.5%;height:2px;background:var(--grad-wide);opacity:.75;box-shadow:0 0 16px rgba(240,80,30,.5)}
+.step{position:relative;text-align:left}
+.node{position:relative;z-index:1;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;margin:0 auto 22px;background:var(--bg);border:2px solid transparent;background-image:linear-gradient(var(--bg),var(--bg)),var(--grad-wide);background-origin:border-box;background-clip:padding-box,border-box;font:600 18px/1 var(--head);box-shadow:0 0 0 6px var(--bg),0 0 24px -4px rgba(240,80,30,.6)}
+.step .card{padding:24px;height:calc(100% - 78px)}
+.step h3{font-size:19px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.step h3 svg{width:20px;height:20px;color:#ffa25a;flex:none}
+.step p{color:var(--muted);font-size:15px}
+
+/* Work */
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.fchip{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--border-2);background:var(--surface);color:var(--muted);font:500 14.5px/1 var(--body);cursor:pointer;transition:all .2s;position:relative}
+.fchip:hover{color:var(--text);border-color:rgba(255,255,255,.3)}
+.fchip[aria-pressed="true"]{background:var(--grad);color:#14080a;border-color:transparent;font-weight:600;box-shadow:0 6px 22px -8px rgba(236,60,20,.8)}
+.fchip .cnt{opacity:.7;margin-left:4px;font-size:12.5px}
+.work{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;grid-auto-flow:dense;margin-top:28px}
+.card-w{display:flex;flex-direction:column;text-decoration:none;overflow:hidden;transition:transform .3s ease,border-color .3s,box-shadow .35s}
+.card-w::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:var(--grad-wide);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .3s;pointer-events:none}
+.card-w:hover,.card-w:focus-visible{transform:translateY(-4px);box-shadow:0 20px 50px -18px rgba(236,60,20,.55),0 0 0 1px rgba(255,120,40,.2)}
+.card-w:hover::before,.card-w:focus-visible::before{opacity:1}
+.card-w.feat{grid-column:span 2}
+.card-w[hidden]{display:none}
+.thumb{position:relative;aspect-ratio:16/10;margin:8px 8px 0;border-radius:14px;overflow:hidden;display:grid;place-items:center}
+.feat .thumb{aspect-ratio:auto;min-height:280px;flex:1}
+.thumb::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.12) 1px,transparent 1.2px);background-size:16px 16px;opacity:.5}
+.thumb svg{width:56px;height:56px;color:rgba(255,255,255,.9);position:relative;z-index:1;filter:drop-shadow(0 6px 18px rgba(0,0,0,.35))}
+.feat .thumb svg{width:76px;height:76px}
+.thumb .lbl{position:absolute;left:10px;bottom:10px;z-index:1;font-size:11.5px;padding:4px 9px;border-radius:999px;background:rgba(0,0,0,.45);color:#e8e8ee;display:inline-flex;gap:5px;align-items:center}
+.thumb .lbl svg{width:12px;height:12px;filter:none}
+.th-el{background:radial-gradient(120% 120% at 0% 0%,#3a2a6e 0%,transparent 60%),radial-gradient(120% 120% at 100% 100%,#a11d4a 0%,transparent 60%),#1b1730}
+.th-vid{background:radial-gradient(120% 120% at 100% 0%,#b5310f 0%,transparent 60%),radial-gradient(120% 120% at 0% 100%,#5a1438 0%,transparent 60%),#24121a}
+.th-on{background:radial-gradient(120% 120% at 0% 100%,#0f5d63 0%,transparent 60%),radial-gradient(120% 120% at 100% 0%,#c06a12 0%,transparent 60%),#12201f}
+.th-web{background:radial-gradient(120% 120% at 100% 100%,#1e4a8a 0%,transparent 60%),radial-gradient(120% 120% at 0% 0%,#8a2a6a 0%,transparent 60%),#141a2a}
+.cbody{padding:20px 22px 22px;display:flex;flex-direction:column;gap:8px}
+.cmeta{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12.5px;color:#ffab5e;font-weight:500;letter-spacing:.06em;text-transform:uppercase}
+.cmeta .arrow{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--border-2);color:var(--text);transition:transform .3s,background .3s;flex:none}
+.cmeta .arrow svg{width:16px;height:16px}
+.card-w:hover .arrow{transform:rotate(-45deg);background:var(--grad);color:#14080a;border-color:transparent}
+.card-w h3{font-size:20px;font-weight:600;line-height:1.25}
+.feat h3{font-size:26px}
+.card-w p{color:var(--muted);font-size:15px}
+.tools-line{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.badge-ma{color:#ffcf9a;border-color:rgba(255,153,26,.35);background:rgba(255,153,26,.08)}
+.empty{display:none;color:var(--muted);text-align:center;padding:40px}
+
+/* Experience + tools */
+.exp-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:start}
+.tl{list-style:none;margin:0;padding:0 0 0 34px;position:relative}
+.tl::before{content:"";position:absolute;left:9px;top:8px;bottom:8px;width:2px;border-radius:2px;background:linear-gradient(180deg,#ff991a,#ec1c08 50%,#e0307a 85%,rgba(224,48,122,0));box-shadow:0 0 14px rgba(240,70,30,.6)}
+.tl li{position:relative;padding:0 0 22px}
+.tl li::before{content:"";position:absolute;left:-31px;top:24px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid #ff7a2a;box-shadow:0 0 0 4px var(--bg),0 0 14px rgba(255,120,40,.7)}
+.tl li:first-child::before{background:var(--grad)}
+.tl .glass{padding:20px 22px;transition:border-color .3s,transform .3s}
+.tl .glass:hover{border-color:var(--border-2);transform:translateX(4px)}
+.tl time{font:500 13px/1 var(--body);color:#ffab5e;letter-spacing:.04em}
+.tl h3{font-size:18px;margin:8px 0 4px;font-weight:600}
+.tl p{color:var(--muted);font-size:15px}
+.now{font-size:11.5px;margin-left:8px;padding:3px 8px;border-radius:999px;background:rgba(255,153,26,.12);color:#ffcf9a;border:1px solid rgba(255,153,26,.3);vertical-align:2px}
+.tools{padding:28px}
+.tools h3{font-size:20px;margin-bottom:6px}
+.tools > p{color:var(--muted);font-size:15px;margin-bottom:20px}
+.cloud{display:flex;flex-wrap:wrap;gap:10px}
+.cloud span{padding:9px 15px;border-radius:999px;background:var(--surface-2);border:1px solid var(--border);font-size:14.5px;color:#d8dbe4;transition:border-color .2s,color .2s}
+.cloud span:hover{border-color:rgba(255,153,26,.5);color:#fff}
+.cloud span.lg{font:500 17px/1.2 var(--head);padding:10px 18px}
+.cloud span.ai{border:1px solid transparent;background-image:linear-gradient(#171a22,#171a22),var(--grad-wide);background-origin:border-box;background-clip:padding-box,border-box;color:#fff}
+.cloud-sub{margin:22px 0 10px;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;gap:8px}
+.cloud-sub i{width:7px;height:7px;border-radius:50%;background:var(--grad)}
+
+/* Contact */
+.contact{position:relative;overflow:hidden;padding:56px;display:grid;grid-template-columns:1fr 1fr;gap:48px;isolation:isolate}
+.contact .blob{opacity:.28}
+.contact h2{font-size:clamp(32px,4.4vw,52px);font-weight:600}
+.contact .lead{color:var(--muted);margin:18px 0 28px;max-width:420px}
+.clist{list-style:none;margin:0 0 28px;padding:0;display:grid;gap:10px}
+.clist a,.clist div{display:flex;align-items:center;gap:14px;min-height:48px;text-decoration:none;color:var(--text);padding:8px 14px 8px 8px;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,.025);transition:border-color .2s;overflow-wrap:anywhere}
+.clist a:hover{border-color:rgba(255,153,26,.5)}
+.clist i{width:36px;height:36px;flex:none;border-radius:10px;display:grid;place-items:center;background:rgba(255,140,40,.1);color:#ffa25a}
+.clist i svg{width:18px;height:18px}
+.clist small{display:block;color:var(--dim);font-size:12px}
+form{display:grid;gap:14px;align-content:start}
+label{font-size:14px;color:var(--muted);display:grid;gap:7px}
+input,textarea{width:100%;font:400 16px/1.4 var(--body);color:var(--text);background:rgba(8,10,14,.6);border:1px solid var(--border-2);border-radius:12px;padding:13px 14px;min-height:48px;transition:border-color .2s,box-shadow .2s}
+textarea{min-height:140px;resize:vertical}
+input:focus,textarea:focus{outline:none;border-color:#ff8a3d;box-shadow:0 0 0 3px rgba(255,138,61,.22)}
+form .btn{justify-self:start;margin-top:4px}
+.note{font-size:13px;color:var(--dim)}
+
+footer{padding:40px 0 60px;color:var(--dim);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid var(--border);padding-top:28px}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover{color:var(--text)}
+
+.dir-badge{position:fixed;left:14px;bottom:14px;z-index:60;padding:8px 13px;border-radius:999px;background:rgba(13,15,20,.9);border:1px solid rgba(255,153,26,.45);color:#ffd2a6;font:600 12px/1 var(--body);letter-spacing:.02em;backdrop-filter:blur(8px);box-shadow:0 6px 20px rgba(0,0,0,.4)}
+
+/* Reveal */
+.js .rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.js .rv.in{opacity:1;transform:none}
+
+@media (max-width:1100px){
+  .chip.c1{left:-4%}.chip.c2{right:-4%}
+}
+@media (max-width:900px){
+  .hero{padding:56px 0 72px}
+  .hero .wrap{grid-template-columns:1fr;gap:56px}
+  .portrait{width:min(78%,340px);order:-1}
+  .bento{grid-template-columns:repeat(2,1fr)}
+  .flow{grid-template-columns:repeat(2,1fr);gap:28px 20px}
+  .flow::before{display:none}
+  .node{margin:0 0 16px}
+  .step .card{height:auto}
+  .work{grid-template-columns:repeat(2,1fr)}
+  .exp-grid{grid-template-columns:1fr}
+  .contact{grid-template-columns:1fr;padding:40px 32px}
+  .sec{padding:72px 0}
+}
+@media (max-width:620px){
+  .wrap{padding:0 16px}
+  .portrait{width:min(76%,300px)}
+  .chip{font-size:13px;padding:8px 12px}
+  .chip.c1{left:-8%;top:6%}.chip.c2{right:-8%}.chip.c3{left:-2%}.chip.c4{right:-2%}
+  .bento{grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:12px}
+  .t-about,.t-ai,.t-build,.t-cta{grid-column:span 2;grid-row:auto}
+  .tile{padding:22px}
+  .tile:not(.t-about):not(.t-ai):not(.t-build):not(.t-cta){padding:20px 18px;min-height:150px}
+  .big{font-size:52px}
+  .eyebrow{border-radius:16px;font-size:13px}
+  .t-ai .row{flex-direction:column;align-items:flex-start}
+  .logos{gap:12px 24px;padding:22px 8px}
+  .logos span.n{font-size:15px}
+  /* vertical flow */
+  .flow{grid-template-columns:1fr;gap:0}
+  .flow::after{content:"";position:absolute;left:27px;top:28px;bottom:60px;width:2px;background:linear-gradient(180deg,#ff991a,#ec1c08,#e0307a);box-shadow:0 0 14px rgba(240,70,30,.5)}
+  .step{display:grid;grid-template-columns:56px 1fr;gap:16px;padding-bottom:18px}
+  .node{margin:0}
+  .work{grid-template-columns:1fr}
+  .card-w.feat{grid-column:auto}
+  .feat .thumb{min-height:0;aspect-ratio:16/10}
+  .feat h3{font-size:22px}
+  .contact{padding:30px 20px;border-radius:18px}
+  .ctas .btn{flex:1 1 100%}
+  .ctas .btn-link{flex:none}
+  .sec{padding:64px 0}
+  .sec-head{margin-bottom:28px}
+  .dir-badge{font-size:11px;padding:7px 11px;left:10px;bottom:10px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mk" href="#top" aria-label="Michal Kleinboim, home">
+      <b aria-hidden="true">MK</b>
+      <span>Michal Kleinboim<small>L&amp;D · Instructional Design</small></span>
+    </a>
+    <button class="burger" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a class="l" href="#work">Work</a>
+      <a class="l" href="#process">How I work</a>
+      <a class="l" href="#experience">Experience</a>
+      <a class="l" href="#contact">Contact</a>
+      <a class="btn btn-grad" href="#" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg>
+        Download CV
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="hero" id="top" aria-labelledby="hero-h">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="blob b1" aria-hidden="true"></div>
+    <div class="blob b2" aria-hidden="true"></div>
+    <div class="blob b3" aria-hidden="true"></div>
+    <div class="wrap">
+      <div>
+        <div class="eyebrow"><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z"/></svg></i>Learning &amp; Development · Instructional Design Specialist</div>
+        <h1 id="hero-h">I design learning that <span class="grad-text">moves the business forward.</span></h1>
+        <p class="sub">L&amp;D and instructional-design specialist with 5+ years building end-to-end learning programs: from needs analysis to AI-powered courseware, video and onboarding, for global, matrixed and public-sector organizations.</p>
+        <div class="ctas">
+          <a class="btn btn-grad" href="#work">View my work
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+          <a class="btn btn-ghost" href="#" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg>Download CV</a>
+          <a class="btn-link" href="#contact"><span>Get in touch</span> →</a>
+        </div>
+        <div class="meta-line">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Petah Tikva, Israel</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>M.A. Educational Technologies</span>
+        </div>
+      </div>
+      <div class="portrait">
+        <div class="ring"><img src="../assets/michal.jpg" alt="Portrait of Michal Kleinboim" width="670" height="670"></div>
+        <span class="chip c1"><i></i>Storyline</span>
+        <span class="chip c4"><i></i>AI tools</span>
+        <span class="chip c2"><i></i>Onboarding</span>
+        <span class="chip c3"><i></i>Video production</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- AT A GLANCE -->
+  <section class="sec" id="about" aria-labelledby="about-h" style="padding-top:24px">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><div class="kicker">At a glance</div><h2 id="about-h">Strategy, design and <span class="grad-text">production</span>, end to end.</h2></div>
+      </div>
+      <div class="bento">
+        <article class="glass tile t-about rv">
+          <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></div>
+          <p class="lead">I'm a Learning &amp; Development professional with a strong technological sense, a problem-solver's mindset and a strategic view. I lead L&amp;D initiatives end-to-end and align them with business priorities, working with cross-functional and global teams. I turn ideas into scalable programs and <em class="grad-text">employee experiences that people actually remember.</em></p>
+          <div class="sig"><img src="../assets/michal.jpg" alt="" width="40" height="40"><span>Michal Kleinboim · Petah Tikva, Israel</span></div>
+        </article>
+        <article class="glass tile rv">
+          <div class="big grad-text">5+</div>
+          <p><strong style="color:var(--text)">years</strong> in Learning &amp; Development</p>
+        </article>
+        <article class="glass tile rv">
+          <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></div>
+          <div><h3>M.A.</h3><p>Educational Technologies, Learning Design</p></div>
+        </article>
+        <article class="glass tile t-ai rv">
+          <div class="row">
+            <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/></svg></div>
+            <span class="tag">AI in learning</span>
+          </div>
+          <div><h3>Directed an AI-in-teaching video series for Microsoft Education IL</h3></div>
+        </article>
+        <article class="glass tile t-build rv">
+          <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="13" width="5" height="8" rx="1"/><rect x="10" y="8" width="5" height="13" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg></div>
+          <div><h3>Built an L&amp;D function from the ground up</h3><p>IT division, Israel Fire &amp; Rescue Authority</p></div>
+        </article>
+        <article class="glass tile t-cta rv">
+          <h3 style="flex:1 1 220px">Hiring for L&amp;D? Let's talk.</h3>
+          <div class="btns">
+            <a class="btn btn-grad" href="#" download>Download CV</a>
+            <a class="btn btn-ghost" href="#contact">Get in touch</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="logos rv" aria-label="Organizations I've worked with">
+        <span class="lbl">Trusted by · worked with</span>
+        <span class="n">Microsoft Education IL</span>
+        <span class="n">El Al Security <small>via Ofek Array</small></span>
+        <span class="n">Israel Fire &amp; Rescue Authority</span>
+        <span class="n">Maytronics</span>
+        <span class="n">HIT</span>
+        <span class="n">Yehud Education Dept.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="sec" id="process" aria-labelledby="proc-h" style="padding-top:40px">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><div class="kicker">How I work</div><h2 id="proc-h">From business need to <span class="grad-text">measurable change.</span></h2></div>
+        <p>A four-step loop that keeps every program anchored to real performance goals.</p>
+      </div>
+      <ol class="flow" style="list-style:none;margin:0;padding:0">
+        <li class="step rv"><div class="node" aria-hidden="true">01</div>
+          <div class="glass card"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Analyze needs</h3>
+          <p>I start with the business: goals, audiences and performance gaps. A systemic needs analysis keeps every initiative focused on real organizational change.</p></div></li>
+        <li class="step rv"><div class="node" aria-hidden="true">02</div>
+          <div class="glass card"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l3-1 11-11-2-2L4 18z"/><path d="M14 6l2-2 4 4-2 2"/></svg>Design solutions</h3>
+          <p>I design learning programs, onboarding journeys and scalable training structures around those needs, so the experience feels seamless and drives performance.</p></div></li>
+        <li class="step rv"><div class="node" aria-hidden="true">03</div>
+          <div class="glass card"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15c-1.5 1.5-2 5-2 5s3.5-.5 5-2"/><path d="M9 15l-3-3c2-5 6-9 13-9 0 7-4 11-9 13z"/><circle cx="14.5" cy="9.5" r="1.5"/></svg>Develop &amp; execute</h3>
+          <p>I build interactive courseware, videos and resources, using multimedia and AI tools to speed up production without losing quality.</p></div></li>
+        <li class="step rv"><div class="node" aria-hidden="true">04</div>
+          <div class="glass card"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>Evaluate &amp; refine</h3>
+          <p>I gather feedback, analyze outcomes and run QA reviews, then iterate until the solution meets and exceeds its objectives.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section class="sec" id="work" aria-labelledby="work-h">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><div class="kicker">Selected work</div><h2 id="work-h">Projects</h2></div>
+        <div class="filters" role="group" aria-label="Filter projects by category">
+          <button class="fchip" aria-pressed="true" data-f="all">All</button>
+          <button class="fchip" aria-pressed="false" data-f="elearning">E-learning</button>
+          <button class="fchip" aria-pressed="false" data-f="onboarding">Onboarding</button>
+          <button class="fchip" aria-pressed="false" data-f="video">Video</button>
+          <button class="fchip" aria-pressed="false" data-f="web">Web &amp; Marketing</button>
+        </div>
+      </div>
+      <p class="sr-only" id="work-status" aria-live="polite"></p>
+      <div class="work" id="work-grid">
+        <a class="glass card-w feat rv" data-cat="elearning" href="case.html">
+          <div class="thumb th-el"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><rect x="9" y="10.5" width="6" height="5" rx="1"/><path d="M10 10.5V9a2 2 0 0 1 4 0v1.5"/></svg><span class="lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/></svg>image</span></div>
+          <div class="cbody">
+            <div class="cmeta"><span>E-learning · Case study</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></div>
+            <h3>Cyber Security Courseware</h3>
+            <p>Turned mandatory security training into an engaging, story-driven course with point-of-view videos starring real employees.</p>
+            <div class="tools-line"><span class="tag">Storyline</span></div>
+          </div>
+        </a>
+        <a class="glass card-w rv" data-cat="video" href="case.html">
+          <div class="thumb th-vid"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M10 9.2v5.6l4.8-2.8z" fill="currentColor"/></svg><span class="lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/></svg>image</span></div>
+          <div class="cbody">
+            <div class="cmeta"><span>Video</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></div>
+            <h3>AI for Teachers: Microsoft Education IL</h3>
+            <p>A promo and training video series encouraging teaching staff to adopt AI tools, released during the Ministry of Education's AI Week.</p>
+            <div class="tools-line"><span class="tag">Premiere Pro</span><span class="tag">After Effects</span><span class="tag">Illustrator</span></div>
+          </div>
+        </a>
+        <a class="glass card-w rv" data-cat="onboarding" href="case.html">
+          <div class="thumb th-on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V4h11l-1.5 3.5L15 11H4"/><circle cx="18" cy="17" r="3"/></svg><span class="lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/></svg>image</span></div>
+          <div class="cbody">
+            <div class="cmeta"><span>Onboarding</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></div>
+            <h3>Maytronics Onboarding Kit</h3>
+            <p>A needs-based welcome journey for new hires at a global high-tech manufacturer, on desktop and mobile.</p>
+            <div class="tools-line"><span class="tag">Genially</span><span class="tag badge-ma">M.A. thesis</span></div>
+          </div>
+        </a>
+        <a class="glass card-w rv" data-cat="elearning" href="case.html">
+          <div class="thumb th-el"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M3 5.5c3-1 6-1 9 1 3-2 6-2 9-1V19c-3-1-6-1-9 1-3-2-6-2-9-1z"/><path d="M12 6.5V20"/></svg><span class="lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/></svg>image</span></div>
+          <div class="cbody">
+            <div class="cmeta"><span>E-learning</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></div>
+            <h3>“Love Thy Neighbor”: Academic Course</h3>
+            <p>Adapted a debate-heavy in-person Judaism course at HIT into interactive online courseware with built-in assessment.</p>
+            <div class="tools-line"><span class="tag">Storyline</span><span class="tag">Moodle</span></div>
+          </div>
+        </a>
+        <a class="glass card-w rv" data-cat="video" href="case.html">
+          <div class="thumb th-vid"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 16a8 8 0 0 1 16 0"/><path d="M2.5 16h19v2.5h-19z"/><path d="M12 8V5.5"/></svg><span class="lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/></svg>image</span></div>
+          <div class="cbody">
+            <div class="cmeta"><span>Video</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></div>
+            <h3>Work Safety Videos</h3>
+            <p>Animated videos for a regulation-compliant work-safety course.</p>
+            <div class="tools-line"><span class="tag">Vyond</span></div>
+          </div>
+        </a>
+        <a class="glass card-w rv" data-cat="web" href="case.html">
+          <div class="thumb th-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M10.5 9v5l4-2.5z" fill="currentColor"/></svg><span class="lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/></svg>image</span></div>
+          <div class="cbody">
+            <div class="cmeta"><span>Web &amp; Marketing</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></div>
+            <h3>Social Media Videos</h3>
+            <p>Short videos produced for Facebook marketing campaigns.</p>
+            <div class="tools-line"><span class="tag">Create Studio</span></div>
+          </div>
+        </a>
+        <a class="glass card-w rv" data-cat="web" href="case.html">
+          <div class="thumb th-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="16" rx="2.5"/><path d="M2.5 8.5h19"/><circle cx="5.5" cy="6.3" r=".6" fill="currentColor"/><circle cx="7.8" cy="6.3" r=".6" fill="currentColor"/><path d="M6 13h6M6 16h4"/><rect x="14" y="12" width="4.5" height="5" rx="1"/></svg><span class="lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/></svg>image</span></div>
+          <div class="cbody">
+            <div class="cmeta"><span>Web &amp; Marketing</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></div>
+            <h3>Raftique Picnic: Business Website</h3>
+            <p>Ran a picnic business's website end-to-end: photo shoots, image editing and marketing strategy.</p>
+            <div class="tools-line"><span class="tag">Wix</span></div>
+          </div>
+        </a>
+        <a class="glass card-w rv" data-cat="web" href="case.html">
+          <div class="thumb th-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="16" rx="2.5"/><path d="M2.5 8.5h19"/><path d="M6 12.5h8M6 15.5h5"/><path d="M16 12l3 3-3 3" stroke-linecap="round"/></svg><span class="lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/></svg>image</span></div>
+          <div class="cbody">
+            <div class="cmeta"><span>Web &amp; Marketing</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></div>
+            <h3>Nike Gloves: Landing Page Concept</h3>
+            <p>Concept landing page for sports gloves, designed during graphic design studies.</p>
+            <div class="tools-line"><span class="tag">Figma</span></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="sec" id="experience" aria-labelledby="exp-h">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><div class="kicker">Experience &amp; tools</div><h2 id="exp-h">Where I've <span class="grad-text">built learning.</span></h2></div>
+      </div>
+      <div class="exp-grid">
+        <ol class="tl">
+          <li class="rv"><div class="glass"><time>2026–Present</time><span class="now">Current</span><h3>Instructional Designer</h3><p>Ofek Array (El Al Security instruction dept.)</p></div></li>
+          <li class="rv"><div class="glass"><time>2025–2026</time><h3>Instructional Design Specialist</h3><p>G-NESS (on-site at Israel Fire &amp; Rescue Authority)</p></div></li>
+          <li class="rv"><div class="glass"><time>2022–2025</time><h3>Instructional Designer &amp; Projects Lead</h3><p>T.MORE Advanced Learning Solutions</p></div></li>
+          <li class="rv"><div class="glass"><time>2022</time><h3>Instructional Designer</h3><p>HIT, Center for the Advancement of Teaching</p></div></li>
+          <li class="rv"><div class="glass"><time>2014–2016</time><h3>Arabic Instructor, Commander's Course</h3><p>IDF Unit 8200</p></div></li>
+        </ol>
+        <div class="glass tools rv">
+          <h3>Toolkit</h3>
+          <p>Authoring, media and AI tools I use to design and ship.</p>
+          <div class="cloud">
+            <span class="lg">Articulate Storyline</span><span>Genially</span><span>Camtasia</span><span class="lg">Vyond</span><span>Moodle</span><span class="lg">Figma</span><span>After Effects</span><span>Illustrator</span><span>Photoshop</span><span>Canva</span><span>Monday</span>
+          </div>
+          <div class="cloud-sub"><i aria-hidden="true"></i>AI in my workflow</div>
+          <div class="cloud">
+            <span class="ai lg">Gemini</span><span class="ai">NotebookLM</span><span class="ai lg">Claude</span><span class="ai">VEO 3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="sec" id="contact" aria-labelledby="contact-h" style="padding-bottom:40px">
+    <div class="wrap">
+      <div class="glass contact rv">
+        <div class="blob b1" aria-hidden="true" style="top:-260px;right:-200px"></div>
+        <div class="blob b3" aria-hidden="true" style="bottom:-300px;left:-200px"></div>
+        <div>
+          <div class="kicker">Contact</div>
+          <h2 id="contact-h">Let's build learning <span class="grad-text">that works.</span></h2>
+          <p class="lead">Open to senior L&amp;D and instructional-design roles. The fastest way to reach me is email.</p>
+          <ul class="clist">
+            <li><a href="mailto:Michal.kleinboim@gmail.com"><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></i><span><small>Email</small>Michal.kleinboim@gmail.com</span></a></li>
+            <li><a href="tel:+972503478599"><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></i><span><small>Phone</small>+972 50-347-8599</span></a></li>
+            <li><a href="#"><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.9 8.5H3.6V20h3.3zM5.2 3.5a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 0 0 0-3.8M20.4 13.2c0-3.1-1.7-4.9-4.2-4.9-1.6 0-2.6.9-3 1.6V8.5H10V20h3.3v-6c0-1.5.6-2.6 2-2.6s1.8 1.1 1.8 2.6v6h3.3z"/></svg></i><span><small>LinkedIn</small>linkedin.com/in/…</span></a></li>
+          </ul>
+          <a class="btn btn-grad" href="#" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg>Download CV</a>
+        </div>
+        <form onsubmit="event.preventDefault();this.querySelector('.note').textContent='Thanks! (Mockup: the form is not connected yet.)'">
+          <label>Name<input name="name" autocomplete="name" required></label>
+          <label>Email<input type="email" name="email" autocomplete="email" required></label>
+          <label>Message<textarea name="message" required></textarea></label>
+          <button class="btn btn-grad" type="submit">Send message
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
+          <p class="note" aria-live="polite">Mockup form: not connected.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Michal Kleinboim</span>
+    <span><a href="mailto:Michal.kleinboim@gmail.com">Email</a> · <a href="#">LinkedIn</a> · <a href="#top">Back to top ↑</a></span>
+  </div>
+</footer>
+
+<div class="dir-badge" aria-hidden="true">Direction C: AI-forward / bold</div>
+
+<script>
+document.documentElement.classList.add('js');
+// Mobile menu
+const burger=document.querySelector('.burger'),nav=document.getElementById('nav');
+burger.addEventListener('click',()=>{const o=nav.classList.toggle('open');burger.setAttribute('aria-expanded',o);burger.setAttribute('aria-label',o?'Close menu':'Open menu')});
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');burger.setAttribute('aria-expanded','false')}));
+// Filters
+const chips=document.querySelectorAll('.fchip'),cards=document.querySelectorAll('#work-grid .card-w'),status=document.getElementById('work-status');
+chips.forEach(c=>c.addEventListener('click',()=>{
+  chips.forEach(x=>x.setAttribute('aria-pressed',x===c));
+  const f=c.dataset.f;let n=0;
+  cards.forEach(card=>{const show=f==='all'||card.dataset.cat===f;card.hidden=!show;if(show){n++;card.classList.add('in')}});
+  status.textContent=n+' projects shown';
+}));
+// Reveal on scroll
+const rv=document.querySelectorAll('.rv');
+if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
+  rv.forEach(el=>io.observe(el));
+}else rv.forEach(el=>el.classList.add('in'));
+</script>
+</body>
+</html>
