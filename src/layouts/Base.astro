@@ -153,14 +153,15 @@ const canonical = new URL(Astro.url.pathname, site.url);
       }),
     );
 
-    // YouTube: load the player only when clicked
-    d.querySelectorAll<HTMLButtonElement>('[data-yt]').forEach((b) =>
+    // Videos and interactive pieces: load the third-party player only when clicked
+    d.querySelectorAll<HTMLButtonElement>('[data-embed]').forEach((b) =>
       b.addEventListener('click', () => {
         const f = d.createElement('iframe');
-        f.src = `https://www.youtube-nocookie.com/embed/${b.dataset.yt}?autoplay=1&rel=0`;
-        f.title = b.getAttribute('aria-label') || 'Video';
-        f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        f.src = b.dataset.embed!;
+        f.title = b.getAttribute('aria-label') || 'Embedded media';
+        f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen; clipboard-write';
         f.allowFullscreen = true;
+        f.setAttribute('scrolling', 'no');
         b.closest('.frame')?.replaceChildren(f);
       }),
     );

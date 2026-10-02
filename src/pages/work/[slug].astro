@@ -18,11 +18,11 @@ interface Props {
 const { project: p, next } = Astro.props;
 const category = categories.find((c) => c.id === p.category)!.label;
 
-// Several media items get the full width under the text; a single one sits beside it.
+// Media sits full width under the text: one item spans it, two sit side by side, phone screens pair up under a wide one.
 const many = p.media.length > 1;
 const portraits = p.media.some((m) => m.portrait);
 const gridClass = portraits ? 'mixed' : many ? 'cols-2' : '';
-const sizes = many ? '(max-width: 640px) 92vw, 420px' : '(max-width: 1099px) 92vw, 520px';
+const sizes = many ? '(max-width: 640px) 92vw, 420px' : '(max-width: 1099px) 92vw, 820px';
 ---
 <Base title={`${p.title} | ${site.name}`} description={p.lead} page="case">
   <main id="content">
@@ -37,7 +37,7 @@ const sizes = many ? '(max-width: 640px) 92vw, 420px' : '(max-width: 1099px) 92v
         <div style="grid-column: span 2"><dt>Tools</dt><dd>{p.tools.join(' · ')}</dd></div>
       </dl>
 
-      <div class:list={['case-grid', { wide: many }]}>
+      <div class="case-grid wide">
         <div class="case-text">
           {p.sections.map((s) => (
             <section class="cblock reveal"><h2>{s.heading}</h2><p>{s.text}</p></section>

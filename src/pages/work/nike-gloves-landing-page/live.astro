@@ -1,0 +1,275 @@
+---
+// Coded version of Michal's Figma concept: a landing page for Nike sports gloves (graphic design student project).
+import { Image } from 'astro:assets';
+import swoosh from '../../../assets/nike/swoosh.jpg';
+import hero from '../../../assets/nike/hero.jpg';
+import thumb1 from '../../../assets/nike/thumb-1.jpg';
+import thumb2 from '../../../assets/nike/thumb-2.jpg';
+import thumb3 from '../../../assets/nike/thumb-3.jpg';
+import gloveMain from '../../../assets/nike/glove-main.jpg';
+import gloveGrip from '../../../assets/nike/glove-grip.jpg';
+import community1 from '../../../assets/nike/community-1.jpg';
+import community2 from '../../../assets/nike/community-2.jpg';
+import community3 from '../../../assets/nike/community-3.jpg';
+import cta from '../../../assets/nike/cta.jpg';
+
+const gallery = [
+  { thumb: thumb1, alt: 'Pair of gloves, back and palm' },
+  { thumb: thumb2, alt: 'Single glove, back view' },
+  { thumb: thumb3, alt: 'Glove worn on a hand' },
+];
+// Large image per thumbnail. The design only has one large product shot, so the thumbnails are reused for the others.
+const large = [thumb1, gloveMain, thumb3];
+
+const features = [
+  { label: 'Strategic Padding', side: 'left', top: 38.3 },
+  { label: 'Real Leather', side: 'right', top: 49.4 },
+  { label: 'Breathable Material', side: 'left', top: 73.7 },
+  { label: 'Soft Touch', side: 'right', top: 80 },
+];
+
+const reviews = [
+  { img: community1, name: 'Michelle', quote: 'Soft touch and great chic', stars: 5 },
+  { img: community2, name: 'Lee', quote: 'The grip is extremely strong!', stars: 5 },
+  { img: community3, name: 'Aurora', quote: 'Can’t wait for more colors', stars: 4 },
+];
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gloves Landing Page Concept | Michal Kleinboim</title>
+  <meta name="description" content="A concept landing page for sports gloves, designed by Michal Kleinboim as a graphic design student project." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="/favicon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&family=Poppins:wght@400&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="concept" role="note">
+    <span><strong>Concept design</strong> · Graphic design student project by Michal Kleinboim. Not affiliated with Nike.</span>
+    <a href="/work/nike-gloves-landing-page/">← Back to the case study</a>
+  </div>
+
+  <header class="nav">
+    <a href="#top" class="logo" aria-label="Back to top"><Image src={swoosh} alt="" width={96} /></a>
+    <nav aria-label="Shop">
+      <a href="#product">New Arrivals</a>
+      <a href="#community">BestSellers</a>
+      <a href="#grip">Matching Sets</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <Image class="hero-img" src={hero} alt="Woman training with a dumbbell, wearing the gloves" widths={[700, 1200, 1732]} sizes="(max-width: 700px) 100vw, 62vw" loading="eager" />
+      <div class="hero-text">
+        <h1>Grip Your Future.</h1>
+        <p class="sub">Glove UP!</p>
+        <a class="shop" href="#product">Shop</a>
+      </div>
+    </section>
+
+    <section class="product" id="product" aria-labelledby="product-h">
+      <div class="gallery">
+        <div class="thumbs" role="group" aria-label="Product images">
+          {gallery.map((g, i) => (
+            <button type="button" class:list={['thumb', { on: i === 1 }]} data-i={i} aria-pressed={i === 1 ? 'true' : 'false'} aria-label={`Show image: ${g.alt}`}>
+              <Image src={g.thumb} alt="" width={180} />
+            </button>
+          ))}
+        </div>
+        <div class="main-img">
+          {large.map((img, i) => (
+            <Image src={img} alt={gallery[i].alt} width={630} class:list={[{ on: i === 1 }]} data-i={i} />
+          ))}
+        </div>
+      </div>
+      <div class="info">
+        <p class="off">25% off</p>
+        <h2 id="product-h">Gym Classic Training Gloves</h2>
+        <p>A soft touch for the strong woman. <br />Improve your results with strong grip abilities, <br />without compromising on style and comfort.</p>
+        <a class="shop" href="#product">Shop</a>
+      </div>
+    </section>
+
+    <section class="grip" id="grip" aria-labelledby="grip-h">
+      <h2 id="grip-h">A strong grip</h2>
+      <div class="grip-stage">
+        <div class="grip-img">
+          <Image src={gloveGrip} alt="Palm side of the glove" width={732} />
+          {features.map((f) => (
+            <span class:list={['feat', f.side]} style={`top:${f.top}%`}><i></i><b>{f.label}</b></span>
+          ))}
+        </div>
+      </div>
+      <ul class="feat-list">{features.map((f) => <li>{f.label}</li>)}</ul>
+    </section>
+
+    <section class="community" id="community" aria-labelledby="community-h">
+      <h2 id="community-h">Join Our Community</h2>
+      <p class="lead">Hear from our happy customers</p>
+      <ul class="reviews">
+        {reviews.map((r) => (
+          <li>
+            <Image src={r.img} alt={`${r.name} training with the gloves`} width={560} />
+            <h3>{r.name}</h3>
+            <p>“{r.quote}”</p>
+            <span class="stars" role="img" aria-label={`${r.stars} out of 5 stars`}>
+              {[1, 2, 3, 4, 5].map((n) => <span class:list={[{ dim: n > r.stars }]} aria-hidden="true">★</span>)}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="cta" aria-labelledby="cta-h">
+      <Image class="cta-img" src={cta} alt="" widths={[800, 1400, 2400]} sizes="100vw" />
+      <div class="cta-text">
+        <h2 id="cta-h">Our gloves keep you soft and strong</h2>
+        <a class="shop" href="#product">Shop</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <Image src={swoosh} alt="" width={96} />
+      <small>© 2024, All Rights Reserved</small>
+    </div>
+    <nav aria-label="Footer">
+      <a href="#top">About us</a>
+      <a href="#top">Contact</a>
+      <a href="#top">Privacy policy</a>
+      <a href="#top">Terms of Use</a>
+    </nav>
+    <div class="social">
+      <a href="#top" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5" /><path d="M14.5 8h-1.5a2 2 0 0 0-2 2v11M9 13h5" /></svg></a>
+      <a href="#top" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.3" cy="6.7" r=".8" fill="currentColor" /></svg></a>
+    </div>
+  </footer>
+
+  <script>
+    const thumbs = document.querySelectorAll<HTMLButtonElement>('.thumb');
+    const imgs = document.querySelectorAll<HTMLImageElement>('.main-img img');
+    thumbs.forEach((t) =>
+      t.addEventListener('click', () => {
+        thumbs.forEach((o) => { o.classList.toggle('on', o === t); o.setAttribute('aria-pressed', String(o === t)); });
+        imgs.forEach((im) => im.classList.toggle('on', im.dataset.i === t.dataset.i));
+      }),
+    );
+  </script>
+
+  <style is:global>
+    :root { --teal: #1ba7c1; --line: #22bad6; --mist: #cfe8ec; --ink: #0b0b0b; }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: 'Kanit', system-ui, sans-serif; font-weight: 300; color: var(--ink); background: #fff; overflow-x: hidden; }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; }
+    h1, h2, h3, p { margin: 0; }
+    :focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; }
+
+    .concept { display: flex; flex-wrap: wrap; gap: 6px 16px; justify-content: space-between; align-items: center; padding: 10px 24px; background: #16181d; color: #e9ecf1; font: 400 14px/1.4 'Poppins', sans-serif; }
+    .concept a { color: #fff; font-weight: 400; text-underline-offset: 3px; }
+
+    .nav { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 14px 8.5vw; background: rgba(255,255,255,.94); backdrop-filter: blur(8px); }
+    .nav .logo img { width: 68px; mix-blend-mode: multiply; }
+    .nav nav { display: flex; gap: clamp(20px, 4vw, 60px); }
+    .nav nav a { text-decoration: none; font-size: clamp(16px, 1.45vw, 21px); font-weight: 400; min-height: 44px; display: inline-flex; align-items: center; }
+    .nav nav a:hover { color: var(--teal); }
+
+    .shop { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 30px; border-radius: 12px; background: var(--teal); color: #fff; text-decoration: none; font-size: 21px; font-weight: 400; transition: background .2s, transform .2s; }
+    .shop:hover { background: #148da4; transform: translateY(-2px); }
+
+    .hero { position: relative; min-height: min(42vw, 640px); background: linear-gradient(90deg, #eef4f6 0%, #e3eef2 40%, #cfe2ea 100%); overflow: hidden; display: flex; align-items: center; }
+    .hero-img { position: absolute; right: 0; top: 0; height: 100%; width: 62%; object-fit: cover; object-position: left center; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 22%); mask-image: linear-gradient(90deg, transparent 0, #000 22%); }
+    .hero-text { position: relative; padding: 0 9.5vw; }
+    .hero h1 { font-weight: 600; font-size: clamp(36px, 4.2vw, 62px); line-height: 1.1; letter-spacing: -.01em; }
+    .hero .sub { font-weight: 400; font-size: clamp(30px, 3.4vw, 50px); margin-top: 10px; }
+    .hero .shop { margin-top: 36px; }
+
+    .product { display: grid; grid-template-columns: auto 1fr; gap: clamp(32px, 6vw, 88px); align-items: start; max-width: 1180px; margin: 0 auto; padding: 90px 32px 120px; }
+    .gallery { display: grid; grid-template-columns: 96px 320px; gap: 8px; }
+    .thumbs { display: grid; gap: 14px; align-content: start; }
+    .thumb { padding: 0; border: 1px solid #222; background: #fff; cursor: pointer; aspect-ratio: 96 / 90; overflow: hidden; }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .thumb.on { border: 2px solid #000; }
+    .main-img { border: 1px solid #222; aspect-ratio: 320 / 300; position: relative; background: #fff; }
+    .main-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity .3s; }
+    .main-img img.on { opacity: 1; }
+    .info { padding-top: 30px; }
+    .info .off { font-size: clamp(22px, 1.7vw, 25px); font-weight: 400; line-height: 1; }
+    .info h2 { font-weight: 600; font-size: clamp(24px, 2vw, 28px); line-height: 1.2; }
+    .info p:not(.off) { margin-top: 26px; font-size: 17px; line-height: 1.85; }
+    .info .shop { margin-top: 26px; }
+
+    .grip { background: var(--mist); padding: 56px 24px 90px; text-align: center; }
+    .grip h2, .community h2 { font-weight: 600; font-size: clamp(26px, 2.1vw, 30px); }
+    .grip-stage { display: flex; justify-content: center; margin-top: 70px; }
+    .grip-img { position: relative; width: min(372px, 70vw); border: 1px solid #222; background: #fff; }
+    .feat { position: absolute; display: flex; align-items: center; transform: translateY(-50%); font-size: clamp(16px, 1.55vw, 22px); font-weight: 300; white-space: nowrap; }
+    .feat i { display: block; height: 3px; width: clamp(40px, 9vw, 130px); background: var(--line); }
+    .feat.left { right: 100%; flex-direction: row-reverse; }
+    .feat.left b { margin-right: 18px; font-weight: 300; }
+    .feat.right { left: 100%; }
+    .feat.right b { margin-left: 18px; font-weight: 300; }
+    .feat-list { display: none; }
+
+    .community { text-align: center; padding: 80px 24px 100px; }
+    .community .lead { font-size: 21px; font-weight: 300; margin-top: 12px; }
+    .reviews { list-style: none; padding: 0; margin: 80px auto 0; max-width: 1020px; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 5vw, 70px); }
+    .reviews img { width: 100%; aspect-ratio: 284 / 267; object-fit: cover; box-shadow: 0 1px 3px rgba(0,0,0,.35); }
+    .reviews h3 { font-weight: 300; font-size: 21px; margin-top: 10px; }
+    .reviews p { font-size: 15px; margin-top: 4px; }
+    .stars { display: inline-flex; gap: 6px; margin-top: 14px; padding: 6px 16px; border-radius: 99px; background: #2b2b2b; color: #f7bf63; font-size: 20px; line-height: 1; box-shadow: 0 2px 4px rgba(0,0,0,.25); }
+    .stars .dim { color: #c9c9c9; }
+
+    .cta { position: relative; min-height: min(42vw, 600px); display: flex; justify-content: center; overflow: hidden; background: #273443; }
+    .cta-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+    .cta::before { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(38,52,68,.85) 0%, rgba(38,52,68,.25) 34%, rgba(0,0,0,0) 60%); }
+    .cta-text { position: relative; z-index: 2; text-align: center; padding: 44px 20px; }
+    .cta h2 { color: #fff; font-weight: 600; font-size: clamp(26px, 2.4vw, 34px); }
+    .cta .shop { margin-top: 18px; }
+
+    .foot { display: flex; align-items: center; justify-content: space-between; gap: 20px 40px; flex-wrap: wrap; padding: 16px 3.5vw; background: #f2f5f9; }
+    .foot img { width: 68px; mix-blend-mode: multiply; }
+    .foot small { display: block; font: 400 12px/1 'Poppins', sans-serif; color: #444; margin-top: 8px; }
+    .foot nav { display: flex; flex-wrap: wrap; gap: 8px clamp(20px, 3.4vw, 48px); margin-left: auto; }
+    .foot nav a { text-decoration: none; font-size: clamp(16px, 1.5vw, 21px); font-weight: 400; min-height: 44px; display: inline-flex; align-items: center; }
+    .social { display: flex; gap: 10px; }
+    .social a { display: grid; place-items: center; width: 44px; height: 44px; }
+    .social svg { width: 28px; height: 28px; }
+
+    @media (max-width: 900px) {
+      .product { grid-template-columns: 1fr; justify-items: center; padding: 60px 20px 80px; }
+      .info { text-align: center; padding-top: 0; }
+      .feat b { display: none; }
+      .feat i { width: 22px; }
+      .feat-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 420px; margin: 32px auto 0; padding: 0; list-style: none; font-size: 17px; }
+      .feat-list li { background: rgba(255,255,255,.7); border-radius: 10px; padding: 10px; }
+    }
+    @media (max-width: 700px) {
+      .nav { padding: 10px 16px; }
+      .nav nav { gap: 12px; }
+      .nav nav a { white-space: nowrap; }
+      .nav nav a { font-size: 13.5px; }
+      .nav .logo img { width: 48px; }
+      .hero { flex-direction: column; align-items: stretch; min-height: 0; }
+      .hero-img { position: relative; width: 100%; height: 300px; -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent); mask-image: linear-gradient(180deg, #000 70%, transparent); order: -1; }
+      .hero-text { padding: 8px 20px 44px; }
+      .gallery { grid-template-columns: 64px minmax(0, 1fr); width: 100%; max-width: 360px; }
+      .thumbs { gap: 8px; }
+      .info p:not(.off) br { display: none; }
+      .reviews { grid-template-columns: 1fr; max-width: 320px; gap: 44px; }
+      .cta { min-height: 420px; }
+      .foot { flex-direction: column; align-items: flex-start; }
+      .foot nav { margin-left: 0; }
+      .concept { padding: 10px 16px; font-size: 13px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+  </style>
+</body>
+</html>

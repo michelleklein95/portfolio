@@ -31,8 +31,8 @@ export const categories: { id: Category; label: string }[] = [
 
 /**
  * One item in a project's "The product" area.
- * - video:       poster image + play button. Add `youtubeId` to make it play.
- * - interactive: poster image + launch button. Add `url` (e.g. a Storyline/Review link).
+ * - video:       poster image + play button. Add `youtubeId` or `facebookUrl` to make it play.
+ * - interactive: poster image; click loads the live version (`url`, e.g. a Genially link) in place.
  * - image:       a screenshot; opens full screen on click. `portrait` for phone screens.
  * - link:        a card that opens an external website. Add `url`.
  * - page:        a tall full-page design shown as a preview; opens full screen on click.
@@ -43,6 +43,7 @@ export type Media = {
   alt: string;
   caption?: string;
   youtubeId?: string;
+  facebookUrl?: string;
   url?: string;
   portrait?: boolean;
 };
@@ -93,6 +94,7 @@ export const projects: Project[] = [
         image: cyberPoster,
         alt: 'Opening screen of the cyber security courseware video',
         caption: 'Excerpt from the courseware, shown at 3× speed',
+        youtubeId: 'leU-XhRL8zs',
       },
     ],
   },
@@ -124,6 +126,7 @@ export const projects: Project[] = [
         image: aiStill,
         alt: 'Still from the AI for Teachers video series',
         caption: 'From the AI for Teachers series',
+        youtubeId: 'YfzcnGQz0n4',
       },
     ],
   },
@@ -151,12 +154,27 @@ export const projects: Project[] = [
       },
     ],
     media: [
-      { kind: 'image', image: maytronics1, alt: 'Desktop welcome screen: Management Team, with a Start button' },
-      { kind: 'image', image: maytronics2, alt: "Mobile welcome screen with the CEO's welcome letter", portrait: true },
       {
-        kind: 'image',
+        kind: 'interactive',
+        image: maytronics1,
+        alt: 'Desktop welcome screen: Management Team, with a Start button',
+        caption: 'Desktop: meet the management team',
+        url: 'https://view.genially.com/6509f20012476b001845e01e',
+      },
+      {
+        kind: 'interactive',
+        image: maytronics2,
+        alt: "Mobile welcome screen with the CEO's welcome letter",
+        caption: 'Mobile: welcome letter',
+        url: 'https://view.genially.com/642a6e1ca78d570011f49f4f',
+        portrait: true,
+      },
+      {
+        kind: 'interactive',
         image: maytronics3,
         alt: 'Mobile screen: upcoming events for the first day and first month',
+        caption: 'Mobile: upcoming events',
+        url: 'https://view.genially.com/64fca81f1f741c00119b947e',
         portrait: true,
       },
     ],
@@ -185,10 +203,11 @@ export const projects: Project[] = [
     ],
     media: [
       {
-        kind: 'interactive',
+        kind: 'video',
         image: academicScreen,
         alt: 'Course opening screen in Hebrew: welcome to the "Love Thy Neighbor" unit, with a Start button',
-        caption: 'Opening screen of the courseware (Hebrew)',
+        caption: 'Walkthrough of the courseware (Hebrew)',
+        youtubeId: 'jawbuvV9DVs',
       },
     ],
   },
@@ -209,8 +228,14 @@ export const projects: Project[] = [
       },
     ],
     media: [
-      { kind: 'video', image: safety1, alt: 'Animated office scene with four employees', caption: 'Video 1' },
-      { kind: 'video', image: safety2, alt: 'Animated office scene near the printer', caption: 'Video 2' },
+      { kind: 'video', image: safety1, alt: 'Animated office scene with four employees', caption: 'Video 1', youtubeId: 'lukRd47BbLs' },
+      {
+        kind: 'video',
+        image: safety2,
+        alt: 'Animated office scene near the printer',
+        caption: 'Video 2',
+        youtubeId: '-EgZzhP8LcY',
+      },
     ],
   },
   {
@@ -230,12 +255,16 @@ export const projects: Project[] = [
       },
     ],
     media: [
-      { kind: 'video', image: social1, alt: 'A smartphone on a desk next to glasses and a laptop', caption: 'Video 1' },
+      { kind: 'video', image: social1, alt: 'A smartphone on a desk next to glasses and a laptop',
+        caption: 'Video 1',
+        facebookUrl: 'https://www.facebook.com/Tikshuv121/videos/27844513095140115/',
+      },
       {
         kind: 'video',
         image: social2,
         alt: 'Animated scene about employee onboarding with a Hebrew caption',
         caption: 'Video 2',
+        facebookUrl: 'https://www.facebook.com/Tikshuv121/videos/498723776183594/',
       },
     ],
   },
@@ -260,8 +289,8 @@ export const projects: Project[] = [
         kind: 'link',
         image: raftiqueThumb,
         alt: 'The Raftique Picnic website',
-        caption: 'The Raftique Picnic website',
-        // TODO(Michal): add the website address, e.g. url: 'https://...'
+        caption: 'raftique.com',
+        url: 'https://www.raftique.com/',
       },
     ],
   },
@@ -283,10 +312,11 @@ export const projects: Project[] = [
     ],
     media: [
       {
-        kind: 'page',
+        kind: 'link',
         image: nikeFull,
-        alt: 'Full Nike gloves landing page design: "Grip Your Future. Glove UP!"',
-        caption: 'View the full landing page',
+        alt: 'The gloves landing page: "Grip Your Future. Glove UP!"',
+        caption: 'The landing page, built from my Figma design',
+        url: '/work/nike-gloves-landing-page/live/',
       },
     ],
   },

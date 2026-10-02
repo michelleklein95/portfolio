@@ -265,15 +265,14 @@ a.crow:hover b{color:var(--accent)}
 .media-grid.mixed{grid-template-columns:repeat(2,minmax(0,1fr))}
 .media-grid.mixed>.media:not(.portrait){grid-column:1/-1}
 .media{margin:0;background:var(--peach);border-radius:20px;padding:12px;display:flex;flex-direction:column}
-.media.portrait .frame{aspect-ratio:auto}
 .frame{position:relative;border-radius:12px;overflow:hidden;background:#14110f;aspect-ratio:16/9}
 .frame img{width:100%;height:100%;object-fit:cover;display:block}
-.media.portrait .frame img{height:auto;max-height:620px;object-fit:contain;background:#fff}
 .frame .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.45))}
 .frame .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2}
 .frame .play:hover{transform:translate(-50%,-50%) scale(1.07)}
 .frame .soon{z-index:2}
-.frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
+.frame .play{cursor:pointer}
 .zoom{display:block;cursor:zoom-in;position:relative}
 .zoom:hover img{filter:brightness(.96)}
 .page-frame{aspect-ratio:4/3}
@@ -302,3 +301,5 @@ a.crow:hover b{color:var(--accent)}
   .topbar .mk img{width:40px}
   .tabs{width:auto;flex:1;margin-left:4px}
 }
+.linkcard .frame img{object-position:top}
+.linkcard:hover .frame img{filter:brightness(.96)}

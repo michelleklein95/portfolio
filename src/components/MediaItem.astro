@@ -11,31 +11,49 @@ const full = item.kind === 'image' || item.kind === 'page'
   ? await getImage({ src: item.image, width: Math.min(item.image.width, 2000), format: 'webp' })
   : null;
 const widths = [480, 800, 1200, 1600].filter((w) => w <= item.image.width);
+
+// What loads in place when the poster is clicked (lite embed: nothing third-party loads before that).
+let embed = '';
+let external = '';
+let externalLabel = '';
+if (item.kind === 'video' && item.youtubeId) {
+  embed = `https://www.youtube-nocookie.com/embed/${item.youtubeId}?autoplay=1&rel=0`;
+  external = `https://youtu.be/${item.youtubeId}`;
+  externalLabel = 'Watch on YouTube';
+} else if (item.kind === 'video' && item.facebookUrl) {
+  embed = `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(item.facebookUrl)}&show_text=false&autoplay=true&width=1280`;
+  external = item.facebookUrl;
+  externalLabel = 'Watch on Facebook';
+} else if (item.kind === 'interactive' && item.url) {
+  embed = item.url;
+  external = item.url;
+  externalLabel = 'Open in new tab';
+}
+// Internal pages open in the same tab, external sites in a new one.
+const internal = item.url?.startsWith('/') ?? false;
+const linkTarget = internal ? {} : { target: '_blank', rel: 'noopener' };
+// Portrait screens keep their own shape so the live version fits the same slot.
+const frameStyle = item.portrait ? `aspect-ratio:${item.image.width}/${item.image.height}` : undefined;
 ---
 <figure class:list={['media', { portrait: item.portrait }]}>
-  {item.kind === 'video' && (
-    <div class="frame">
+  {(item.kind === 'video' || item.kind === 'interactive') && (
+    <div class="frame" style={frameStyle}>
       <Image src={item.image} alt={item.alt} widths={widths} sizes={sizes} />
       <span class="shade" aria-hidden="true"></span>
-      {item.youtubeId ? (
-        <button class="play" type="button" data-yt={item.youtubeId} aria-label={`Play video: ${item.alt}`}><svg aria-hidden="true"><use href="#i-play" /></svg></button>
+      {embed ? (
+        <button
+          class="play"
+          type="button"
+          data-embed={embed}
+          aria-label={`${item.kind === 'video' ? 'Play video' : 'Open interactive version'}: ${item.alt}`}
+        ><svg aria-hidden="true"><use href="#i-play" /></svg></button>
       ) : (
         <>
           <span class="play" aria-hidden="true"><svg><use href="#i-play" /></svg></span>
-          <span class="soon">Video coming soon</span>
+          <span class="soon">{item.kind === 'video' ? 'Video coming soon' : 'Interactive version coming soon'}</span>
         </>
       )}
-    </div>
-  )}
-
-  {item.kind === 'interactive' && (
-    <div class="frame">
-      <Image src={item.image} alt={item.alt} widths={widths} sizes={sizes} />
-      {item.url ? (
-        <a class="btn btn-grad launch" href={item.url} target="_blank" rel="noopener">Launch course<svg aria-hidden="true"><use href="#i-ext" /></svg></a>
-      ) : (
-        <span class="soon">Interactive version coming soon</span>
-      )}
+      {item.kind === 'interactive' && embed && <span class="soon try">Click to try it</span>}
     </div>
   )}
 
@@ -49,7 +67,7 @@ const widths = [480, 800, 1200, 1600].filter((w) => w <= item.image.width);
 
   {item.kind === 'link' && (
     item.url ? (
-      <a class="linkcard" href={item.url} target="_blank" rel="noopener">
+      <a class="linkcard" href={item.url} {...linkTarget}>
         <div class="frame"><Image src={item.image} alt={item.alt} widths={widths} sizes={sizes} /></div>
       </a>
     ) : (
@@ -62,8 +80,11 @@ const widths = [480, 800, 1200, 1600].filter((w) => w <= item.image.width);
     {(item.kind === 'image' || item.kind === 'page') && (
       <a class="fs" href={full!.src} data-lightbox data-alt={item.alt}><svg aria-hidden="true"><use href="#i-full" /></svg>Full screen</a>
     )}
+    {external && (
+      <a class="fs" href={external} target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-ext" /></svg>{externalLabel}</a>
+    )}
     {item.kind === 'link' && item.url && (
-      <a class="fs" href={item.url} target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-ext" /></svg>Open website</a>
+      <a class="fs" href={item.url} {...linkTarget}><svg aria-hidden="true"><use href="#i-ext" /></svg>{internal ? 'View live page' : 'Visit website'}</a>
     )}
   </div>
 </figure>
