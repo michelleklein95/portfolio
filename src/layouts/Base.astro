@@ -1,0 +1,186 @@
+---
+import { Image, getImage } from 'astro:assets';
+import Icons from '../components/Icons.astro';
+import { site } from '../data/site';
+import photo from '../assets/michal.jpg';
+import logo from '../assets/mk-logo.png';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  page: 'home' | 'case';
+}
+const { title, description = site.description, page } = Astro.props;
+const base = page === 'home' ? '' : '/';
+const ogImage = await getImage({ src: photo, width: 600, format: 'jpg' });
+const canonical = new URL(Astro.url.pathname, site.url);
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={new URL(ogImage.src, site.url)} />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" href="/favicon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body data-page={page}>
+  <Icons />
+  <a class="skip" href="#content">Skip to content</a>
+  <div class="shell">
+    <aside class="profile" aria-label="Profile">
+      <a class="mk" href={`${base}#home`} aria-label={`${site.name}, home`}><Image src={logo} alt="" width={128} /></a>
+      <div class="pcard">
+        <Image class="pphoto" src={photo} alt={`Portrait of ${site.name}`} width={148} height={148} densities={[1, 2]} loading="eager" />
+        <h2 class="pname">{site.name}</h2>
+        <p class="ptitle">{site.titleLines[0]}<br />{site.titleLines[1]}</p>
+        <div class="contact-box">
+          <a class="crow" href={site.phoneHref}><span class="cico"><svg aria-hidden="true"><use href="#i-phone" /></svg></span><span><small>Phone</small><b>{site.phone}</b></span></a>
+          <a class="crow" href={`mailto:${site.email}`}><span class="cico"><svg aria-hidden="true"><use href="#i-mail" /></svg></span><span><small>Email</small><b>{site.email}</b></span></a>
+          <div class="crow"><span class="cico"><svg aria-hidden="true"><use href="#i-pin" /></svg></span><span><small>Location</small><b>{site.location}</b></span></div>
+        </div>
+        <a class="btn btn-grad btn-block" href={site.cv} download><svg aria-hidden="true"><use href="#i-dl" /></svg>Download CV</a>
+        {site.linkedin && (
+          <div class="psocial">
+            <a class="icon-btn" href={site.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn profile"><svg aria-hidden="true"><use href="#i-in" /></svg></a>
+          </div>
+        )}
+      </div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <a class="mk" href={`${base}#home`} aria-label={`${site.name}, home`}><Image src={logo} alt="" width={104} /></a>
+        <nav class="tabs" aria-label="Main">
+          <a class="tab" href={`${base}#home`} data-nav="home"><svg aria-hidden="true"><use href="#i-home" /></svg>Home</a>
+          <a class="tab" href={`${base}#work`} data-nav="work"><svg aria-hidden="true"><use href="#i-work" /></svg>Work</a>
+          <a class="tab" href={`${base}#resume`} data-nav="resume"><svg aria-hidden="true"><use href="#i-doc" /></svg>Resume</a>
+        </nav>
+      </header>
+
+      <div class="mob-head">
+        <Image src={photo} alt={`Portrait of ${site.name}`} width={88} height={88} densities={[1, 2]} loading="eager" />
+        <div class="mh-id">
+          <p class="pname" style="font-family:var(--head);font-weight:600;color:var(--ink)">{site.name}</p>
+          <p class="ptitle">{site.title}</p>
+          <div class="mh-meta">
+            <a href={`mailto:${site.email}`}><svg aria-hidden="true"><use href="#i-mail" /></svg>{site.email}</a>
+            <a href={site.phoneHref}><svg aria-hidden="true"><use href="#i-phone" /></svg>{site.phone}</a>
+            <span style="display:inline-flex;align-items:center;gap:6px"><svg aria-hidden="true"><use href="#i-pin" /></svg>{site.location}</span>
+          </div>
+        </div>
+        <div class="mh-cta">
+          <a class="btn btn-grad" href={site.cv} download><svg aria-hidden="true"><use href="#i-dl" /></svg>Download CV</a>
+          <a class="btn btn-ghost" href={`mailto:${site.email}`}><svg aria-hidden="true"><use href="#i-mail" /></svg>Email me</a>
+        </div>
+      </div>
+
+      <slot />
+
+      <footer class="footer"><p>© {new Date().getFullYear()} {site.name}</p></footer>
+    </div>
+  </div>
+
+  <dialog class="lightbox" id="lightbox" aria-label="Full screen image">
+    <button class="lb-close" type="button" aria-label="Close">×</button>
+    <div class="lb-scroll"><img alt="" /></div>
+  </dialog>
+
+  <script>
+    const d = document;
+    d.documentElement.classList.add('js');
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Reveal on scroll
+    const rev = d.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window) || reduce) rev.forEach((e) => e.classList.add('in'));
+    else {
+      const io = new IntersectionObserver(
+        (es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }),
+        { rootMargin: '0px 0px -6% 0px' },
+      );
+      rev.forEach((e) => io.observe(e));
+    }
+
+    // Active tab follows scroll on the home page
+    const tabs = d.querySelectorAll<HTMLElement>('[data-nav]');
+    const setActive = (k: string) =>
+      tabs.forEach((t) => {
+        const on = t.dataset.nav === k;
+        t.classList.toggle('is-active', on);
+        on ? t.setAttribute('aria-current', 'true') : t.removeAttribute('aria-current');
+      });
+    if (d.body.dataset.page === 'case') setActive('work');
+    else {
+      const map = [['home', 'home'], ['about', 'home'], ['work', 'work'], ['resume', 'resume']];
+      const onScroll = () => {
+        const y = innerHeight * 0.35;
+        let cur = 'home';
+        map.forEach(([id, k]) => { const el = d.getElementById(id); if (el && el.getBoundingClientRect().top < y) cur = k; });
+        if (innerHeight + scrollY >= d.documentElement.scrollHeight - 4) cur = 'resume';
+        setActive(cur);
+      };
+      addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+
+    // Portfolio filters
+    const chips = d.querySelectorAll<HTMLButtonElement>('.chip');
+    const cards = d.querySelectorAll<HTMLElement>('.wcard');
+    const count = d.getElementById('count');
+    chips.forEach((c) =>
+      c.addEventListener('click', () => {
+        const f = c.dataset.f;
+        let n = 0;
+        chips.forEach((o) => o.setAttribute('aria-pressed', String(o === c)));
+        cards.forEach((k) => {
+          const show = f === 'all' || k.dataset.cat === f;
+          k.hidden = !show;
+          if (show) { n++; k.classList.add('in'); }
+        });
+        if (count) count.textContent = `${n} projects shown`;
+      }),
+    );
+
+    // YouTube: load the player only when clicked
+    d.querySelectorAll<HTMLButtonElement>('[data-yt]').forEach((b) =>
+      b.addEventListener('click', () => {
+        const f = d.createElement('iframe');
+        f.src = `https://www.youtube-nocookie.com/embed/${b.dataset.yt}?autoplay=1&rel=0`;
+        f.title = b.getAttribute('aria-label') || 'Video';
+        f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        f.allowFullscreen = true;
+        b.closest('.frame')?.replaceChildren(f);
+      }),
+    );
+
+    // Full-screen image viewer
+    const lb = d.getElementById('lightbox') as HTMLDialogElement | null;
+    if (lb && typeof lb.showModal === 'function') {
+      const img = lb.querySelector('img')!;
+      d.querySelectorAll<HTMLAnchorElement>('a[data-lightbox]').forEach((a) =>
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          img.src = a.href;
+          img.alt = a.dataset.alt || '';
+          lb.querySelector('.lb-scroll')!.scrollTop = 0;
+          lb.showModal();
+        }),
+      );
+      lb.querySelector('.lb-close')!.addEventListener('click', () => lb.close());
+      lb.addEventListener('click', (e) => { if (e.target === lb) lb.close(); });
+    }
+  </script>
+</body>
+</html>

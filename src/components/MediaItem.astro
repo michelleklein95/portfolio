@@ -1,0 +1,69 @@
+---
+import { Image, getImage } from 'astro:assets';
+import type { Media } from '../data/projects';
+
+interface Props {
+  item: Media;
+  sizes: string;
+}
+const { item, sizes } = Astro.props;
+const full = item.kind === 'image' || item.kind === 'page'
+  ? await getImage({ src: item.image, width: Math.min(item.image.width, 2000), format: 'webp' })
+  : null;
+const widths = [480, 800, 1200, 1600].filter((w) => w <= item.image.width);
+---
+<figure class:list={['media', { portrait: item.portrait }]}>
+  {item.kind === 'video' && (
+    <div class="frame">
+      <Image src={item.image} alt={item.alt} widths={widths} sizes={sizes} />
+      <span class="shade" aria-hidden="true"></span>
+      {item.youtubeId ? (
+        <button class="play" type="button" data-yt={item.youtubeId} aria-label={`Play video: ${item.alt}`}><svg aria-hidden="true"><use href="#i-play" /></svg></button>
+      ) : (
+        <>
+          <span class="play" aria-hidden="true"><svg><use href="#i-play" /></svg></span>
+          <span class="soon">Video coming soon</span>
+        </>
+      )}
+    </div>
+  )}
+
+  {item.kind === 'interactive' && (
+    <div class="frame">
+      <Image src={item.image} alt={item.alt} widths={widths} sizes={sizes} />
+      {item.url ? (
+        <a class="btn btn-grad launch" href={item.url} target="_blank" rel="noopener">Launch course<svg aria-hidden="true"><use href="#i-ext" /></svg></a>
+      ) : (
+        <span class="soon">Interactive version coming soon</span>
+      )}
+    </div>
+  )}
+
+  {(item.kind === 'image' || item.kind === 'page') && (
+    <a class="zoom" href={full!.src} data-lightbox data-alt={item.alt} aria-label={`Open full screen: ${item.alt}`}>
+      <div class:list={['frame', { 'page-frame': item.kind === 'page' }]}>
+        <Image src={item.image} alt={item.alt} widths={widths} sizes={sizes} />
+      </div>
+    </a>
+  )}
+
+  {item.kind === 'link' && (
+    item.url ? (
+      <a class="linkcard" href={item.url} target="_blank" rel="noopener">
+        <div class="frame"><Image src={item.image} alt={item.alt} widths={widths} sizes={sizes} /></div>
+      </a>
+    ) : (
+      <div class="frame"><Image src={item.image} alt={item.alt} widths={widths} sizes={sizes} /><span class="soon">Website link coming soon</span></div>
+    )
+  )}
+
+  <div class="media-bar">
+    {item.caption && <figcaption>{item.caption}</figcaption>}
+    {(item.kind === 'image' || item.kind === 'page') && (
+      <a class="fs" href={full!.src} data-lightbox data-alt={item.alt}><svg aria-hidden="true"><use href="#i-full" /></svg>Full screen</a>
+    )}
+    {item.kind === 'link' && item.url && (
+      <a class="fs" href={item.url} target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-ext" /></svg>Open website</a>
+    )}
+  </div>
+</figure>

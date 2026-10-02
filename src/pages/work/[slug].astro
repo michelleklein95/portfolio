@@ -1,0 +1,76 @@
+---
+import Base from '../../layouts/Base.astro';
+import MediaItem from '../../components/MediaItem.astro';
+import { site } from '../../data/site';
+import { projects, categories, type Project } from '../../data/projects';
+
+export function getStaticPaths() {
+  return projects.map((project, i) => ({
+    params: { slug: project.slug },
+    props: { project, next: projects[(i + 1) % projects.length] },
+  }));
+}
+
+interface Props {
+  project: Project;
+  next: Project;
+}
+const { project: p, next } = Astro.props;
+const category = categories.find((c) => c.id === p.category)!.label;
+
+// Several media items get the full width under the text; a single one sits beside it.
+const many = p.media.length > 1;
+const portraits = p.media.some((m) => m.portrait);
+const gridClass = portraits ? 'mixed' : many ? 'cols-2' : '';
+const sizes = many ? '(max-width: 640px) 92vw, 420px' : '(max-width: 1099px) 92vw, 520px';
+---
+<Base title={`${p.title} | ${site.name}`} description={p.lead} page="case">
+  <main id="content">
+    <article class="panel case">
+      <a class="backlink" href="/#work"><svg aria-hidden="true"><use href="#i-back" /></svg>Back to work</a>
+      <span class="eyebrow" style="margin-top:26px">Case study · {category}</span>
+      <h1 class="title case-h">{p.title}</h1>
+      <p class="lead" style="margin-top:14px">{p.lead}</p>
+      <dl class="meta">
+        <div><dt>Category</dt><dd>{category}</dd></div>
+        <div><dt>Role</dt><dd>{p.role}</dd></div>
+        <div style="grid-column: span 2"><dt>Tools</dt><dd>{p.tools.join(' · ')}</dd></div>
+      </dl>
+
+      <div class:list={['case-grid', { wide: many }]}>
+        <div class="case-text">
+          {p.sections.map((s) => (
+            <section class="cblock reveal"><h2>{s.heading}</h2><p>{s.text}</p></section>
+          ))}
+        </div>
+        <section class="product reveal" aria-labelledby="prod-h">
+          <h2 id="prod-h">The product</h2>
+          <div class:list={['media-grid', gridClass]}>
+            {p.media.map((m) => <MediaItem item={m} sizes={m.portrait ? '(max-width: 640px) 45vw, 300px' : sizes} />)}
+          </div>
+        </section>
+      </div>
+
+      {p.outcome && (
+        <section class="outcome reveal" aria-labelledby="out-h">
+          <h2 id="out-h">Outcome</h2>
+          <p>{p.outcome}</p>
+        </section>
+      )}
+
+      <nav class="case-nav" aria-label="Project navigation">
+        <a class="btn btn-ghost" href="/#work"><svg aria-hidden="true"><use href="#i-back" /></svg>Back to work</a>
+        <a class="next" href={`/work/${next.slug}/`}><small>Next project</small><span>{next.title}<svg aria-hidden="true"><use href="#i-arrow" /></svg></span></a>
+      </nav>
+    </article>
+
+    <section class="panel cta-band reveal" aria-label="Get in touch">
+      <div><h2 style="font-size:24px;font-weight:600">Let's build learning that works.</h2><p style="margin-top:6px">Hiring for an L&amp;D or instructional design role? I'd love to hear about it.</p></div>
+      <div class="ctas" style="margin:0">
+        <a class="btn btn-grad" href={site.cv} download><svg aria-hidden="true"><use href="#i-dl" /></svg>Download CV</a>
+        <a class="btn btn-ghost" href={`mailto:${site.email}`}><svg aria-hidden="true"><use href="#i-mail" /></svg>Email me</a>
+        <a class="btn btn-ghost" href={site.phoneHref}><svg aria-hidden="true"><use href="#i-phone" /></svg>Call</a>
+      </div>
+    </section>
+  </main>
+</Base>
