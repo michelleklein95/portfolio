@@ -1,5 +1,5 @@
 ---
-import { Image, getImage } from 'astro:assets';
+import { Image } from 'astro:assets';
 import Icons from '../components/Icons.astro';
 import { site } from '../data/site';
 import photo from '../assets/michal.jpg';
@@ -13,7 +13,6 @@ interface Props {
 }
 const { title, description = site.description, page } = Astro.props;
 const base = page === 'home' ? '' : '/';
-const ogImage = await getImage({ src: photo, width: 600, format: 'jpg' });
 const canonical = new URL(Astro.url.pathname, site.url);
 ---
 <!doctype html>
@@ -28,8 +27,13 @@ const canonical = new URL(Astro.url.pathname, site.url);
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonical} />
-  <meta property="og:image" content={new URL(ogImage.src, site.url)} />
-  <meta name="twitter:card" content="summary" />
+  <meta property="og:site_name" content={site.name} />
+  <meta property="og:image" content={new URL('/og.png', site.url)} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content={`${site.name}, ${site.title}`} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content={new URL('/og.png', site.url)} />
   <link rel="icon" href="/favicon.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -46,8 +50,8 @@ const canonical = new URL(Astro.url.pathname, site.url);
         <h2 class="pname">{site.name}</h2>
         <p class="ptitle">{site.titleLines[0]}<br />{site.titleLines[1]}</p>
         <div class="contact-box">
-          <a class="crow" href={site.phoneHref}><span class="cico"><svg aria-hidden="true"><use href="#i-phone" /></svg></span><span><small>Phone</small><b>{site.phone}</b></span></a>
-          <a class="crow" href={`mailto:${site.email}`}><span class="cico"><svg aria-hidden="true"><use href="#i-mail" /></svg></span><span><small>Email</small><b>{site.email}</b></span></a>
+          <a class="crow" href={site.phoneHref} data-contact="phone"><span class="cico"><svg aria-hidden="true"><use href="#i-phone" /></svg></span><span><small>Phone</small><b>{site.phone}</b></span></a>
+          <a class="crow" href={`mailto:${site.email}`} data-contact="email"><span class="cico"><svg aria-hidden="true"><use href="#i-mail" /></svg></span><span><small>Email</small><b>{site.email}</b></span></a>
           <div class="crow"><span class="cico"><svg aria-hidden="true"><use href="#i-pin" /></svg></span><span><small>Location</small><b>{site.location}</b></span></div>
         </div>
         <a class="btn btn-grad btn-block" href={site.cv} download><svg aria-hidden="true"><use href="#i-dl" /></svg>Download CV</a>
@@ -69,22 +73,23 @@ const canonical = new URL(Astro.url.pathname, site.url);
         </nav>
       </header>
 
-      <div class="mob-head">
+      <section class="mob-head" aria-label="Profile">
         <Image src={photo} alt={`Portrait of ${site.name}`} width={88} height={88} densities={[1, 2]} loading="eager" />
         <div class="mh-id">
           <p class="pname" style="font-family:var(--head);font-weight:600;color:var(--ink)">{site.name}</p>
           <p class="ptitle">{site.title}</p>
           <div class="mh-meta">
-            <a href={`mailto:${site.email}`}><svg aria-hidden="true"><use href="#i-mail" /></svg>{site.email}</a>
-            <a href={site.phoneHref}><svg aria-hidden="true"><use href="#i-phone" /></svg>{site.phone}</a>
+            <a href={`mailto:${site.email}`} data-contact="email"><svg aria-hidden="true"><use href="#i-mail" /></svg>{site.email}</a>
+            <a href={site.phoneHref} data-contact="phone"><svg aria-hidden="true"><use href="#i-phone" /></svg>{site.phone}</a>
+            {site.linkedin && <a href={site.linkedin} target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-in" /></svg>LinkedIn</a>}
             <span style="display:inline-flex;align-items:center;gap:6px"><svg aria-hidden="true"><use href="#i-pin" /></svg>{site.location}</span>
           </div>
         </div>
         <div class="mh-cta">
           <a class="btn btn-grad" href={site.cv} download><svg aria-hidden="true"><use href="#i-dl" /></svg>Download CV</a>
-          <a class="btn btn-ghost" href={`mailto:${site.email}`}><svg aria-hidden="true"><use href="#i-mail" /></svg>Email me</a>
+          <a class="btn btn-ghost" href={`mailto:${site.email}`} data-contact="email"><svg aria-hidden="true"><use href="#i-mail" /></svg>Email me</a>
         </div>
-      </div>
+      </section>
 
       <slot />
 
@@ -95,6 +100,37 @@ const canonical = new URL(Astro.url.pathname, site.url);
   <dialog class="lightbox" id="lightbox" aria-label="Full screen image">
     <button class="lb-close" type="button" aria-label="Close">×</button>
     <div class="lb-scroll"><img alt="" /></div>
+  </dialog>
+
+  <dialog class="contact-dlg" id="contact" aria-labelledby="contact-h">
+    <button class="lb-close" type="button" aria-label="Close">×</button>
+    <h2 id="contact-h">Get in touch</h2>
+    <div class="cd-group">
+      <p class="cd-label">Email</p>
+      <p class="cd-value">{site.email}</p>
+      <div class="cd-actions">
+        <a class="btn btn-grad" href={`https://mail.google.com/mail/?view=cm&fs=1&to=${site.email}`} target="_blank" rel="noopener">Gmail</a>
+        <a class="btn btn-ghost" href={`https://outlook.office.com/mail/deeplink/compose?to=${site.email}`} target="_blank" rel="noopener">Outlook</a>
+        <a class="btn btn-ghost" href={`mailto:${site.email}`}>Mail app</a>
+        <button class="btn btn-ghost" type="button" data-copy={site.email}>Copy address</button>
+      </div>
+    </div>
+    <div class="cd-group">
+      <p class="cd-label">Phone</p>
+      <p class="cd-value">{site.phone}</p>
+      <div class="cd-actions">
+        <a class="btn btn-ghost" href={site.phoneHref}>Call</a>
+        <a class="btn btn-ghost" href={site.whatsapp} target="_blank" rel="noopener">WhatsApp</a>
+        <button class="btn btn-ghost" type="button" data-copy={site.phone}>Copy number</button>
+      </div>
+    </div>
+    {site.linkedin && (
+      <div class="cd-group">
+        <p class="cd-label">LinkedIn</p>
+        <div class="cd-actions"><a class="btn btn-ghost" href={site.linkedin} target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-in" /></svg>View profile</a></div>
+      </div>
+    )}
+    <p class="cd-status" aria-live="polite"></p>
   </dialog>
 
   <script>
@@ -165,6 +201,37 @@ const canonical = new URL(Astro.url.pathname, site.url);
         b.closest('.frame')?.replaceChildren(f);
       }),
     );
+
+    // Contact panel: mailto alone fails silently without a mail app or inside WhatsApp/Teams/LinkedIn browsers,
+    // so email links open a panel with options that always work. Phone links only do this on desktop.
+    const cd = d.getElementById('contact') as HTMLDialogElement | null;
+    if (cd && typeof cd.showModal === 'function') {
+      const status = cd.querySelector('.cd-status')!;
+      const desktop = matchMedia('(hover: hover) and (pointer: fine)');
+      d.querySelectorAll<HTMLAnchorElement>('[data-contact]').forEach((a) =>
+        a.addEventListener('click', (e) => {
+          if (a.dataset.contact === 'phone' && !desktop.matches) return;
+          e.preventDefault();
+          status.textContent = '';
+          cd.showModal();
+        }),
+      );
+      const copy = async (text: string) => {
+        try { await navigator.clipboard.writeText(text); return true; } catch {
+          const t = d.createElement('textarea');
+          t.value = text; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.opacity = '0';
+          cd.append(t); t.select();
+          const ok = d.execCommand('copy'); t.remove(); return ok;
+        }
+      };
+      cd.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((b) =>
+        b.addEventListener('click', async () => {
+          status.textContent = (await copy(b.dataset.copy!)) ? `Copied: ${b.dataset.copy}` : 'Copy failed, please select the text above.';
+        }),
+      );
+      cd.querySelector('.lb-close')!.addEventListener('click', () => cd.close());
+      cd.addEventListener('click', (e) => { if (e.target === cd) cd.close(); });
+    }
 
     // Full-screen image viewer
     const lb = d.getElementById('lightbox') as HTMLDialogElement | null;

@@ -68,8 +68,8 @@ const sizes = many ? '(max-width: 640px) 92vw, 420px' : '(max-width: 1099px) 92v
       <div><h2 style="font-size:24px;font-weight:600">Let's build learning that works.</h2><p style="margin-top:6px">Hiring for an L&amp;D or instructional design role? I'd love to hear about it.</p></div>
       <div class="ctas" style="margin:0">
         <a class="btn btn-grad" href={site.cv} download><svg aria-hidden="true"><use href="#i-dl" /></svg>Download CV</a>
-        <a class="btn btn-ghost" href={`mailto:${site.email}`}><svg aria-hidden="true"><use href="#i-mail" /></svg>Email me</a>
-        <a class="btn btn-ghost" href={site.phoneHref}><svg aria-hidden="true"><use href="#i-phone" /></svg>Call</a>
+        <a class="btn btn-ghost" href={`mailto:${site.email}`} data-contact="email"><svg aria-hidden="true"><use href="#i-mail" /></svg>Email me</a>
+        <a class="btn btn-ghost" href={site.phoneHref} data-contact="phone"><svg aria-hidden="true"><use href="#i-phone" /></svg>Call</a>
       </div>
     </section>
   </main>

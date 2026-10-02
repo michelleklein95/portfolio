@@ -42,16 +42,22 @@ const reviews = [
   <title>Gloves Landing Page Concept | Michal Kleinboim</title>
   <meta name="description" content="A concept landing page for sports gloves, designed by Michal Kleinboim as a graphic design student project." />
   <meta name="robots" content="noindex" />
+  <meta property="og:title" content="Gloves Landing Page Concept | Michal Kleinboim" />
+  <meta property="og:description" content="A concept landing page designed by Michal Kleinboim as a graphic design student project." />
+  <meta property="og:image" content="https://michal-kleinboim.netlify.app/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="/favicon.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&family=Poppins:wght@400&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <div class="concept" role="note">
+  <aside class="concept" aria-label="About this page">
     <span><strong>Concept design</strong> · Graphic design student project by Michal Kleinboim. Not affiliated with Nike.</span>
     <a href="/work/nike-gloves-landing-page/">← Back to the case study</a>
-  </div>
+  </aside>
 
   <header class="nav">
     <a href="#top" class="logo" aria-label="Back to top"><Image src={swoosh} alt="" width={96} /></a>
@@ -64,7 +70,7 @@ const reviews = [
 
   <main id="top">
     <section class="hero">
-      <Image class="hero-img" src={hero} alt="Woman training with a dumbbell, wearing the gloves" widths={[700, 1200, 1732]} sizes="(max-width: 700px) 100vw, 62vw" loading="eager" />
+      <Image class="hero-img" src={hero} alt="Woman training with a dumbbell, wearing the gloves" widths={[700, 1200, 1732]} sizes="(max-width: 700px) 100vw, 62vw" loading="eager" fetchpriority="high" />
       <div class="hero-text">
         <h1>Grip Your Future.</h1>
         <p class="sub">Glove UP!</p>
@@ -181,8 +187,8 @@ const reviews = [
     .nav nav a { text-decoration: none; font-size: clamp(16px, 1.45vw, 21px); font-weight: 400; min-height: 44px; display: inline-flex; align-items: center; }
     .nav nav a:hover { color: var(--teal); }
 
-    .shop { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 30px; border-radius: 12px; background: var(--teal); color: #fff; text-decoration: none; font-size: 21px; font-weight: 400; transition: background .2s, transform .2s; }
-    .shop:hover { background: #148da4; transform: translateY(-2px); }
+    .shop { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 30px; border-radius: 12px; background: #127f94; color: #fff; text-decoration: none; font-size: 21px; font-weight: 400; transition: background .2s, transform .2s; }
+    .shop:hover { background: #0f6c7e; transform: translateY(-2px); }
 
     .hero { position: relative; min-height: min(42vw, 640px); background: linear-gradient(90deg, #eef4f6 0%, #e3eef2 40%, #cfe2ea 100%); overflow: hidden; display: flex; align-items: center; }
     .hero-img { position: absolute; right: 0; top: 0; height: 100%; width: 62%; object-fit: cover; object-position: left center; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 22%); mask-image: linear-gradient(90deg, transparent 0, #000 22%); }

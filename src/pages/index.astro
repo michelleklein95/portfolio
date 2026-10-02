@@ -15,7 +15,7 @@ const catLabel = Object.fromEntries(categories.map((c) => [c.id, c.label]));
       <div class="ctas">
         <a class="btn btn-grad" href="#work">View my work<svg aria-hidden="true"><use href="#i-arrow" /></svg></a>
         <a class="btn btn-ghost" href={site.cv} download><svg aria-hidden="true"><use href="#i-dl" /></svg>Download CV</a>
-        <a class="btn btn-text" href={`mailto:${site.email}`}>Email me</a>
+        <a class="btn btn-text" href={`mailto:${site.email}`} data-contact="email">Email me</a>
       </div>
       <ul class="glance" aria-label="At a glance" style="list-style:none;padding:0">
         {glance.map((g) => <li class="gl reveal"><b>{g.big}</b><span>{g.small}</span></li>)}

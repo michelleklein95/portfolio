@@ -5,10 +5,11 @@ export const site = {
   titleLines: ['Learning & Development', 'Instructional Design Specialist'],
   phone: '+972 50-347-8599',
   phoneHref: 'tel:+972503478599',
+  whatsapp: 'https://wa.me/972503478599',
   email: 'Michal.kleinboim@gmail.com',
-  location: 'Petah Tikva, Israel',
+  location: 'Ramat Gan, Israel',
   // Leave empty to hide the LinkedIn button.
-  linkedin: '',
+  linkedin: 'https://www.linkedin.com/in/michal-kleinboim-193b30238/',
   cv: '/cv/Michal-Kleinboim-CV.pdf',
   url: 'https://michal-kleinboim.netlify.app',
   description:
@@ -61,18 +62,21 @@ export const experience = [
     org: 'Ofek Array · Instruction department, El Al security section',
     points: [
       "Advise content specialists on learning goals aligned to the organization's top five strategic priorities.",
-      'Created organization-wide guidelines that standardize how instructors and content experts produce training material.',
-      'Design security-training programs and digital courseware, and analyze outcomes to refine them.',
+      'Create organization-wide guidelines that standardize how instructors and content experts produce training material.',
+      'Manage end-to-end development of digital learning products, from design and implementation to QA and continuous adaptation.',
+      'Analyze training outcomes to continuously refine programs.',
     ],
   },
   {
     when: '2025–2026',
     role: 'Instructional Design Specialist',
-    org: 'G-NESS · On-site at the Israel Fire & Rescue Authority',
+    org: 'Israel Fire & Rescue Authority · IT Division, Information Systems Implementation & Operations',
     points: [
       'Established the L&D function for the IT division, turning complex systems into user-friendly digital learning.',
       'Partnered with stakeholders to align technology roadmaps with business goals and close skill gaps.',
-      "Integrated AI tools to scale L&D processes, and led the division's professional conventions.",
+      "Built and managed the employee Technological Academy training programs.",
+      'Integrated AI tools to scale L&D processes, and trained employees to use AI in their workflows while protecting data privacy.',
+      "Led the IT division's professional conventions: knowledge-sharing and strategy-aligned content.",
     ],
   },
   {
@@ -126,11 +130,13 @@ export const tools = [
   'Camtasia',
   'Vyond',
   'Moodle',
+  'Blossom LMS',
   'Figma',
   'After Effects',
   'Premiere Pro',
   'Illustrator',
   'Photoshop',
+  'Audition',
   'Canva',
   'Create Studio',
   'Gemini',
@@ -138,6 +144,7 @@ export const tools = [
   'Claude',
   'VEO 3',
   'Monday',
+  'Microsoft Planner',
 ];
 
 export const languages = [
