@@ -36,22 +36,22 @@ export const steps = [
   {
     icon: 's-analyze',
     title: 'Analyze needs',
-    text: 'I start with the business: goals, audiences and performance gaps. A systemic needs analysis keeps every initiative focused on real organizational change.',
+    text: 'I start with the business: goals, audiences, and performance gaps. A systemic needs analysis keeps every initiative focused on real organizational change.',
   },
   {
     icon: 's-design',
     title: 'Design solutions',
-    text: 'I design learning programs, onboarding journeys and scalable training structures around those needs, so the experience feels seamless and drives performance.',
+    text: 'I design learning programs, onboarding journeys, and scalable training structures around those needs, so the experience feels seamless and drives performance.',
   },
   {
     icon: 's-dev',
     title: 'Develop & execute',
-    text: 'I build interactive courseware, videos and resources, using multimedia and AI tools to speed up production without losing quality.',
+    text: 'I build interactive courseware, videos, and resources, using multimedia and AI tools to speed up production without losing quality.',
   },
   {
     icon: 's-eval',
     title: 'Evaluate & refine',
-    text: 'I gather feedback, analyze outcomes and run QA reviews, then iterate until the solution meets and exceeds its objectives.',
+    text: 'I gather feedback, analyze outcomes, and run QA reviews, then iterate until the solution meets and exceeds its objectives.',
   },
 ];
 
@@ -64,7 +64,7 @@ export const experience = [
       "Advise content specialists on learning goals aligned to the organization's top five strategic priorities.",
       'Create organization-wide guidelines that standardize how instructors and content experts produce training material.',
       'Manage end-to-end development of digital learning products, from design and implementation to QA and continuous adaptation.',
-      'Analyze training outcomes to continuously refine programs.',
+      'Analyze training outcomes to refine programs continuously.',
     ],
   },
   {
@@ -75,7 +75,7 @@ export const experience = [
       'Established the L&D function for the IT division, turning complex systems into user-friendly digital learning.',
       'Partnered with stakeholders to align technology roadmaps with business goals and close skill gaps.',
       "Built and managed the employee Technological Academy training programs.",
-      'Integrated AI tools to scale L&D processes, and trained employees to use AI in their workflows while protecting data privacy.',
+      'Integrated AI tools to scale L&D processes and trained employees to use AI in their workflows while protecting data privacy.',
       "Led the IT division's professional conventions: knowledge-sharing and strategy-aligned content.",
     ],
   },
@@ -114,7 +114,7 @@ export const education = [
     when: '2021–2023',
     role: 'M.A., Educational Technologies (Learning Design)',
     org: 'Kibbutzim College',
-    note: 'Thesis: a needs-based onboarding kit to speed up new-employee integration at Maytronics.',
+    note: 'Thesis: A needs-based onboarding kit to speed up new-employee integration at Maytronics.',
   },
   {
     when: '2017–2021',

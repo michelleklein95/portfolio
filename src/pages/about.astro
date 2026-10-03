@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, steps } from '../data/site';
+---
+<Base title={`About me | ${site.name}`} description="How Michal Kleinboim works: from needs analysis to design, development and evaluation of learning programs." page="about">
+  <main id="content">
+    <section class="panel" id="about" aria-labelledby="about-h">
+      <h1 class="title" id="about-h">About me</h1>
+      <p class="lead" style="margin-top:18px">I'm a Learning &amp; Development professional with a strong technological sense, a problem-solver's mindset, and a strategic view. I lead L&amp;D initiatives end-to-end and align them with business priorities, working with cross-functional and global teams. I turn ideas into scalable programs and employee experiences that people actually remember.</p>
+      <h3 class="sub">How I work</h3>
+      <ol class="steps">
+        {steps.map((s, i) => (
+          <li class="step reveal">
+            <div class="step-h"><span class="step-ico"><svg aria-hidden="true"><use href={`#${s.icon}`} /></svg></span><h3><small>{String(i + 1).padStart(2, '0')}</small>{s.title}</h3></div>
+            <p>{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+  </main>
+</Base>

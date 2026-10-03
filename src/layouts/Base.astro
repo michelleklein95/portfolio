@@ -9,10 +9,16 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
-  page: 'home' | 'case';
+  page: 'home' | 'about' | 'resume' | 'case';
 }
 const { title, description = site.description, page } = Astro.props;
-const base = page === 'home' ? '' : '/';
+// Which tab is highlighted. Case studies belong to Work.
+const active = page === 'home' || page === 'case' ? 'work' : page;
+const nav = [
+  { key: 'work', href: '/#work', icon: 'i-work', label: 'Work' },
+  { key: 'about', href: '/about/', icon: 'i-user', label: 'About me' },
+  { key: 'resume', href: '/resume/', icon: 'i-doc', label: 'Resume' },
+];
 const canonical = new URL(Astro.url.pathname, site.url);
 ---
 <!doctype html>
@@ -44,7 +50,7 @@ const canonical = new URL(Astro.url.pathname, site.url);
   <a class="skip" href="#content">Skip to content</a>
   <div class="shell">
     <aside class="profile" aria-label="Profile">
-      <a class="mk" href={`${base}#home`} aria-label={`${site.name}, home`}><Image src={logo} alt="" width={128} /></a>
+      <a class="mk" href="/" aria-label={`${site.name}, home`}><Image src={logo} alt="" width={128} /></a>
       <div class="pcard">
         <Image class="pphoto" src={photo} alt={`Portrait of ${site.name}`} width={148} height={148} densities={[1, 2]} loading="eager" />
         <h2 class="pname">{site.name}</h2>
@@ -57,7 +63,7 @@ const canonical = new URL(Astro.url.pathname, site.url);
         <a class="btn btn-grad btn-block" href={site.cv} download><svg aria-hidden="true"><use href="#i-dl" /></svg>Download CV</a>
         {site.linkedin && (
           <div class="psocial">
-            <a class="icon-btn" href={site.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn profile"><svg aria-hidden="true"><use href="#i-in" /></svg></a>
+            <a class="icon-btn" href={site.linkedin} target="_blank" rel="noopener" aria-label="View LinkedIn Profile"><svg aria-hidden="true"><use href="#i-in" /></svg></a>
           </div>
         )}
       </div>
@@ -65,11 +71,11 @@ const canonical = new URL(Astro.url.pathname, site.url);
 
     <div class="main">
       <header class="topbar">
-        <a class="mk" href={`${base}#home`} aria-label={`${site.name}, home`}><Image src={logo} alt="" width={104} /></a>
+        <a class="mk" href="/" aria-label={`${site.name}, home`}><Image src={logo} alt="" width={104} /></a>
         <nav class="tabs" aria-label="Main">
-          <a class="tab" href={`${base}#home`} data-nav="home"><svg aria-hidden="true"><use href="#i-home" /></svg>Home</a>
-          <a class="tab" href={`${base}#work`} data-nav="work"><svg aria-hidden="true"><use href="#i-work" /></svg>Work</a>
-          <a class="tab" href={`${base}#resume`} data-nav="resume"><svg aria-hidden="true"><use href="#i-doc" /></svg>Resume</a>
+          {nav.map((n) => (
+            <a class:list={['tab', { 'is-active': n.key === active }]} href={n.href} aria-current={n.key === active ? 'page' : undefined}><svg aria-hidden="true"><use href={`#${n.icon}`} /></svg>{n.label}</a>
+          ))}
         </nav>
       </header>
 
@@ -81,13 +87,13 @@ const canonical = new URL(Astro.url.pathname, site.url);
           <div class="mh-meta">
             <a href={`mailto:${site.email}`} data-contact="email"><svg aria-hidden="true"><use href="#i-mail" /></svg>{site.email}</a>
             <a href={site.phoneHref} data-contact="phone"><svg aria-hidden="true"><use href="#i-phone" /></svg>{site.phone}</a>
-            {site.linkedin && <a href={site.linkedin} target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-in" /></svg>LinkedIn</a>}
+            {site.linkedin && <a href={site.linkedin} target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-in" /></svg>View LinkedIn Profile</a>}
             <span style="display:inline-flex;align-items:center;gap:6px"><svg aria-hidden="true"><use href="#i-pin" /></svg>{site.location}</span>
           </div>
         </div>
         <div class="mh-cta">
           <a class="btn btn-grad" href={site.cv} download><svg aria-hidden="true"><use href="#i-dl" /></svg>Download CV</a>
-          <a class="btn btn-ghost" href={`mailto:${site.email}`} data-contact="email"><svg aria-hidden="true"><use href="#i-mail" /></svg>Email me</a>
+          <a class="btn btn-ghost" href={`mailto:${site.email}`} data-contact="email"><svg aria-hidden="true"><use href="#i-mail" /></svg>Contact me</a>
         </div>
       </section>
 
@@ -111,8 +117,6 @@ const canonical = new URL(Astro.url.pathname, site.url);
       <div class="cd-actions">
         <a class="btn btn-grad" href={`https://mail.google.com/mail/?view=cm&fs=1&to=${site.email}`} target="_blank" rel="noopener">Gmail</a>
         <a class="btn btn-ghost" href={`https://outlook.office.com/mail/deeplink/compose?to=${site.email}`} target="_blank" rel="noopener">Outlook</a>
-        <a class="btn btn-ghost" href={`mailto:${site.email}`}>Mail app</a>
-        <button class="btn btn-ghost" type="button" data-copy={site.email}>Copy address</button>
       </div>
     </div>
     <div class="cd-group">
@@ -121,7 +125,6 @@ const canonical = new URL(Astro.url.pathname, site.url);
       <div class="cd-actions">
         <a class="btn btn-ghost" href={site.phoneHref}>Call</a>
         <a class="btn btn-ghost" href={site.whatsapp} target="_blank" rel="noopener">WhatsApp</a>
-        <button class="btn btn-ghost" type="button" data-copy={site.phone}>Copy number</button>
       </div>
     </div>
     {site.linkedin && (
@@ -130,7 +133,6 @@ const canonical = new URL(Astro.url.pathname, site.url);
         <div class="cd-actions"><a class="btn btn-ghost" href={site.linkedin} target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-in" /></svg>View profile</a></div>
       </div>
     )}
-    <p class="cd-status" aria-live="polite"></p>
   </dialog>
 
   <script>
@@ -147,28 +149,6 @@ const canonical = new URL(Astro.url.pathname, site.url);
         { rootMargin: '0px 0px -6% 0px' },
       );
       rev.forEach((e) => io.observe(e));
-    }
-
-    // Active tab follows scroll on the home page
-    const tabs = d.querySelectorAll<HTMLElement>('[data-nav]');
-    const setActive = (k: string) =>
-      tabs.forEach((t) => {
-        const on = t.dataset.nav === k;
-        t.classList.toggle('is-active', on);
-        on ? t.setAttribute('aria-current', 'true') : t.removeAttribute('aria-current');
-      });
-    if (d.body.dataset.page === 'case') setActive('work');
-    else {
-      const map = [['home', 'home'], ['about', 'home'], ['work', 'work'], ['resume', 'resume']];
-      const onScroll = () => {
-        const y = innerHeight * 0.35;
-        let cur = 'home';
-        map.forEach(([id, k]) => { const el = d.getElementById(id); if (el && el.getBoundingClientRect().top < y) cur = k; });
-        if (innerHeight + scrollY >= d.documentElement.scrollHeight - 4) cur = 'resume';
-        setActive(cur);
-      };
-      addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
     }
 
     // Portfolio filters
@@ -206,27 +186,12 @@ const canonical = new URL(Astro.url.pathname, site.url);
     // so email links open a panel with options that always work. Phone links only do this on desktop.
     const cd = d.getElementById('contact') as HTMLDialogElement | null;
     if (cd && typeof cd.showModal === 'function') {
-      const status = cd.querySelector('.cd-status')!;
       const desktop = matchMedia('(hover: hover) and (pointer: fine)');
       d.querySelectorAll<HTMLAnchorElement>('[data-contact]').forEach((a) =>
         a.addEventListener('click', (e) => {
           if (a.dataset.contact === 'phone' && !desktop.matches) return;
           e.preventDefault();
-          status.textContent = '';
           cd.showModal();
-        }),
-      );
-      const copy = async (text: string) => {
-        try { await navigator.clipboard.writeText(text); return true; } catch {
-          const t = d.createElement('textarea');
-          t.value = text; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.opacity = '0';
-          cd.append(t); t.select();
-          const ok = d.execCommand('copy'); t.remove(); return ok;
-        }
-      };
-      cd.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((b) =>
-        b.addEventListener('click', async () => {
-          status.textContent = (await copy(b.dataset.copy!)) ? `Copied: ${b.dataset.copy}` : 'Copy failed, please select the text above.';
         }),
       );
       cd.querySelector('.lb-close')!.addEventListener('click', () => cd.close());

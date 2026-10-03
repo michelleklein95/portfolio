@@ -80,7 +80,7 @@ a.crow:hover b{color:var(--accent)}
 /* hero */
 .hero{position:relative;overflow:hidden;padding:64px 60px 56px}
 .hero::before{content:"";position:absolute;right:-120px;top:-140px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(255,153,26,.18),rgba(255,153,26,0) 70%);pointer-events:none}
-.hero h1{font-size:clamp(34px,4.4vw,56px);font-weight:600;letter-spacing:-.025em;line-height:1.1;max-width:15ch}
+.hero h1{font-size:clamp(30px,3.5vw,46px);font-weight:600;letter-spacing:-.02em;line-height:1.15;max-width:22ch}
 .hero h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero .lead{margin-top:22px}
 .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px;align-items:center}
@@ -330,5 +330,4 @@ a.crow:hover b{color:var(--accent)}
 .cd-value{font:500 17px/1.4 var(--head);color:var(--ink);margin-top:6px;word-break:break-word;user-select:all}
 .cd-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .cd-actions .btn{min-height:44px;padding:0 16px;font-size:14.5px;flex:1 1 auto}
-.cd-status{min-height:22px;font-size:14px;color:#1f6f43;font-weight:500}
 .mh-meta a svg{flex:none}

@@ -272,7 +272,7 @@ export const projects: Project[] = [
     slug: 'raftique-business-website',
     title: 'Raftique Picnic: Business Website',
     category: 'web',
-    summary: "Ran a picnic business's website end-to-end: photo shoots, image editing and marketing strategy.",
+    summary: "Ran a picnic business's website end-to-end: photo shoots, image editing, and marketing strategy.",
     lead: 'Running the website and marketing of a private picnic business.',
     role: 'Website & marketing manager',
     tools: ['Wix'],

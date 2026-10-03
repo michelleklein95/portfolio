@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import { site, glance, clients, steps, experience, education, tools, languages } from '../data/site';
+import { site, glance, clients } from '../data/site';
 import { projects, categories } from '../data/projects';
 
 const catLabel = Object.fromEntries(categories.map((c) => [c.id, c.label]));
@@ -10,12 +10,12 @@ const catLabel = Object.fromEntries(categories.map((c) => [c.id, c.label]));
   <main id="content">
     <section class="panel hero" id="home" aria-labelledby="hero-h">
       <span class="eyebrow">L&amp;D · Instructional Design</span>
-      <h1 id="hero-h">I design learning that <em>moves the business forward.</em></h1>
-      <p class="lead">L&amp;D and instructional-design specialist with 5+ years building end-to-end learning programs: from needs analysis to AI-powered courseware, video and onboarding, for global, matrixed and public-sector organizations.</p>
+      <h1 id="hero-h">I bridge the gap between business strategy and employee capabilities <em>through innovative learning.</em></h1>
+      <p class="lead">L&amp;D and instructional design specialist with 5+ years building end-to-end learning programs: from needs analysis to AI-powered courseware, video, and onboarding, for global, matrixed, and public-sector organizations.</p>
       <div class="ctas">
         <a class="btn btn-grad" href="#work">View my work<svg aria-hidden="true"><use href="#i-arrow" /></svg></a>
         <a class="btn btn-ghost" href={site.cv} download><svg aria-hidden="true"><use href="#i-dl" /></svg>Download CV</a>
-        <a class="btn btn-text" href={`mailto:${site.email}`} data-contact="email">Email me</a>
+        <a class="btn btn-text" href={`mailto:${site.email}`} data-contact="email">Contact me</a>
       </div>
       <ul class="glance" aria-label="At a glance" style="list-style:none;padding:0">
         {glance.map((g) => <li class="gl reveal"><b>{g.big}</b><span>{g.small}</span></li>)}
@@ -24,20 +24,6 @@ const catLabel = Object.fromEntries(categories.map((c) => [c.id, c.label]));
         <small>Worked with</small>
         <ul class="logos">{clients.map((c) => <li>{c}</li>)}</ul>
       </div>
-    </section>
-
-    <section class="panel reveal" id="about" aria-labelledby="about-h">
-      <h2 class="title" id="about-h">About me</h2>
-      <p class="lead" style="margin-top:18px">I'm a Learning &amp; Development professional with a strong technological sense, a problem-solver's mindset and a strategic view. I lead L&amp;D initiatives end-to-end and align them with business priorities, working with cross-functional and global teams. I turn ideas into scalable programs and employee experiences that people actually remember.</p>
-      <h3 class="sub">How I work</h3>
-      <ol class="steps">
-        {steps.map((s, i) => (
-          <li class="step reveal">
-            <div class="step-h"><span class="step-ico"><svg aria-hidden="true"><use href={`#${s.icon}`} /></svg></span><h3><small>{String(i + 1).padStart(2, '0')}</small>{s.title}</h3></div>
-            <p>{s.text}</p>
-          </li>
-        ))}
-      </ol>
     </section>
 
     <section class="panel" id="work" aria-labelledby="work-h">
@@ -67,43 +53,5 @@ const catLabel = Object.fromEntries(categories.map((c) => [c.id, c.label]));
       </div>
     </section>
 
-    <section class="panel reveal" id="resume" aria-labelledby="resume-h">
-      <h2 class="title" id="resume-h">Resume</h2>
-      <h3 class="sub" style="margin-top:28px"><svg aria-hidden="true"><use href="#i-work" /></svg>Experience</h3>
-      <ol class="timeline">
-        {experience.map((e) => (
-          <li class="tl"><div class="tl-card">
-            <time>{e.when}</time><h3>{e.role}</h3><p>{e.org}</p>
-            {e.points.length > 0 && <ul>{e.points.map((pt) => <li>{pt}</li>)}</ul>}
-          </div></li>
-        ))}
-      </ol>
-
-      <h3 class="sub"><svg aria-hidden="true"><use href="#i-cap" /></svg>Education</h3>
-      <ol class="timeline">
-        {education.map((e) => (
-          <li class="tl"><div class="tl-card">
-            <time>{e.when}</time><h3>{e.role}</h3><p>{e.org}</p>
-            {e.note && <p class="note">{e.note}</p>}
-          </div></li>
-        ))}
-      </ol>
-
-      <div class="res-cols">
-        <div>
-          <h3 class="sub"><svg aria-hidden="true"><use href="#i-tool" /></svg>Tools</h3>
-          <ul class="tools">{tools.map((t) => <li>{t}</li>)}</ul>
-        </div>
-        <div>
-          <h3 class="sub">Languages</h3>
-          <ul class="langs">{languages.map((l) => <li><b>{l.name}</b><span>{l.level}</span></li>)}</ul>
-        </div>
-      </div>
-
-      <div class="res-cta">
-        <p>Want the full picture?</p>
-        <a class="btn btn-grad" href={site.cv} download><svg aria-hidden="true"><use href="#i-dl" /></svg>Download CV</a>
-      </div>
-    </section>
   </main>
 </Base>
