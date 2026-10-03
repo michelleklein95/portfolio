@@ -11,18 +11,17 @@ const catLabel = Object.fromEntries(categories.map((c) => [c.id, c.label]));
     <section class="panel hero" id="home" aria-labelledby="hero-h">
       <span class="eyebrow">L&amp;D · Instructional Design</span>
       <h1 id="hero-h">I bridge the gap between business strategy and employee capabilities <em>through innovative learning.</em></h1>
-      <p class="lead">L&amp;D and instructional design specialist with 5+ years building end-to-end learning programs: from needs analysis to AI-powered courseware, video, and onboarding, for global, matrixed, and public-sector organizations.</p>
-      <div class="ctas">
-        <a class="btn btn-grad" href="#work">View my work<svg aria-hidden="true"><use href="#i-arrow" /></svg></a>
-        <a class="btn btn-ghost" href={site.cv} download><svg aria-hidden="true"><use href="#i-dl" /></svg>Download CV</a>
-        <a class="btn btn-text" href={`mailto:${site.email}`} data-contact="email">Contact me</a>
-      </div>
       <ul class="glance" aria-label="At a glance" style="list-style:none;padding:0">
         {glance.map((g) => <li class="gl reveal"><b>{g.big}</b><span>{g.small}</span></li>)}
       </ul>
       <div class="trusted">
         <small>Worked with</small>
         <ul class="logos">{clients.map((c) => <li>{c}</li>)}</ul>
+      </div>
+      <div class="ctas">
+        <a class="btn btn-grad" href="#work">View my work<svg aria-hidden="true"><use href="#i-arrow" /></svg></a>
+        <a class="btn btn-ghost" href={site.cv} download><svg aria-hidden="true"><use href="#i-dl" /></svg>Download CV</a>
+        <a class="btn btn-text" href={`mailto:${site.email}`} data-contact="email">Contact me</a>
       </div>
     </section>
 
